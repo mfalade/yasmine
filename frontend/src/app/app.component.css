@@ -1,0 +1,47 @@
+.navbar {
+  height: 70px;
+  border-bottom: 1px solid #d8dde6;
+}
+
+.side-nav {
+  width: 250px;
+  height: 100vh;
+  padding: 50px;
+  border-right: 1px solid #d8dde6;
+}
+
+.inline {
+  display: flex;
+}
+
+.content-area {
+  padding: 50px;
+}
+
+.content-area--form-area {
+  width: 500px;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+.pull-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-container input,
+.form-container select {
+  margin-left: 70px;
+  margin-top: 10px;
+}
+
+.slds-tabs--default__nav {
+  display: none!important;
+}

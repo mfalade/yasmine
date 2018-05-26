@@ -1,0 +1,32 @@
+<div class="body">
+  <div class="navbar">
+
+  </div>
+  <div class="container">
+    <div class="inline">
+      <div class="side-nav">
+        <ul class="dropdown__list" role="menu">
+          <li class="slds-menu__item">
+            <a role="menuitem">
+              <a routerLink="/" routerLinkActive="active">All Data</a>
+              <ngl-icon type="default" size="x-small"></ngl-icon>
+            </a>
+          </li>
+          <li>&nbsp;</li>
+          <li class="slds-menu__item">
+            <a role="menuitem">
+              <a routerLink="/data/create" routerLinkActive="active">Add New</a>
+              <ngl-icon type="default" size="x-small"></ngl-icon>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="content-area">
+        <div class="content-area--form-area">
+          <router-outlet>
+          </router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

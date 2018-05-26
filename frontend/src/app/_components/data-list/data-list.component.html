@@ -1,0 +1,43 @@
+<div class="data-list-header">
+  <h3>Data list</h3>
+  <button (click)="addNewItem()" type="button" nglButton="neutral">Add New</button>
+</div>
+
+<table ngl-datatable [data]="dataList" trackByKey="rank" [loading]="loading" class="slds-max-medium-table--stacked-horizontal">
+  <ngl-datatable-column heading="Field 1" key="field1"></ngl-datatable-column>
+  <ngl-datatable-column heading="Field 2" key="field2"></ngl-datatable-column>
+  <ngl-datatable-column heading="Field 3" key="field3"></ngl-datatable-column>
+  <ngl-datatable-column heading="Field 4" key="field4"></ngl-datatable-column>
+  <ngl-datatable-column heading="Field 7" key="field7"></ngl-datatable-column>
+  <ngl-datatable-column heading="Field 8" key="field8"></ngl-datatable-column>
+  <ngl-datatable-column heading="Client" key="client"></ngl-datatable-column>
+  <ngl-datatable-column heading="New Member" key="newMember"></ngl-datatable-column>
+  <ngl-datatable-column heading="" key="" cellClass="slds-truncate" sortable>
+    <ng-template nglDatatableCell let-row="row">
+      <button (click)="editData(row)" type="button" nglButton="neutral">Edit</button>
+    </ng-template>
+  </ngl-datatable-column>
+  <ngl-datatable-column heading="" key="" cellClass="slds-truncate" sortable>
+    <ng-template nglDatatableCell let-row="row">
+      <button (click)="stageItemForDeletion(row)" type="button" nglButton="destructive">Delete</button>
+    </ng-template>
+  </ngl-datatable-column>
+
+  <ng-template nglLoadingOverlay>
+    <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">Loading...</div>
+  </ng-template>
+
+  <ng-template nglNoRowsOverlay>No data available in table!</ng-template>
+</table>
+
+<ngl-modal [header]="'Delete ' + stagedItem?.field2" [(open)]="showModal" [directional]="true">
+  <div body class="modal-body">
+    <h4>Are you sure you want to delete this item ?</h4>
+    <h5>This action is irreversible</h5>
+    <p class="error-text" [ngClass]="{'active': deleteItemError}">Failed to delete item.</p>
+  </div>
+  <ng-template ngl-modal-footer>
+    <button class="slds-button slds-button--neutral" (click)="showModal = deleteItemError = false">Cancel</button>
+    <button (click)="confirmDelete()" type="button" nglButton="destructive">Delete</button>
+  </ng-template>
+</ngl-modal>

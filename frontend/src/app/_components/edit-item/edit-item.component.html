@@ -1,0 +1,103 @@
+<div class="slds-notify_container">
+    <ngl-notification *ngIf="showSuccessMessage" type="alert" (nglNotificationClose)="showSuccessMessage = false" severity="success"
+      timeout="5000" class="slds-theme--alert-texture">
+      <h2>Item successfully updated!</h2>
+    </ngl-notification>
+  </div>
+  <div class="slds-notify_container">
+    <ngl-notification *ngIf="showErrorMessage" type="alert" (nglNotificationClose)="showErrorMessage = false" severity="error"
+      timeout="5000" class="slds-theme--alert-texture">
+      <h2>Failed to update item! Reason: {{errorMessage}}</h2>
+    </ngl-notification>
+  </div>
+
+  <form [formGroup]="dataForm">
+    <ngl-tabs [(selected)]="selectedTab" [type]="type">
+      <ng-template ngl-tab nglTabId="firstPage" #firstPage="nglTab">
+        <div>
+          <p>Page 1</p>
+          <h3>Edit Item:  {{ data && data.field2 }} </h3>
+          <p>Please fill up the following: "all mandatory fields"</p>
+          <hr />
+          <div class="form-container">
+            <ngl-form-element label="Please Select" class="slds-m-top--small">
+              <select nglFormControl class="slds-select" formControlName="field1" [required]="false">
+                <option value="default-1">MenuItem One</option>
+                <option value="default-2">MenuItem Two</option>
+                <option value="default-3">MenuItem Three</option>
+              </select>
+            </ngl-form-element>
+
+            <ngl-form-element label="Please Select" class="slds-m-top--small">
+              <input nglFormControl type="text" formControlName="field2" placeholder="Fill up text" [required]="false">
+            </ngl-form-element>
+
+            <ngl-form-element label="Please Select" class="slds-m-top--small">
+              <select nglFormControl class="slds-select" formControlName="field3" [required]="false">
+                <option value="default-1">By default: YES</option>
+                <option value="default-2">MenuItem Two</option>
+                <option value="default-3">MenuItem Three</option>
+              </select>
+            </ngl-form-element>
+          </div>
+        </div>
+        <div class="controls">
+          <div class="pull-right">
+            <button type="button" nglButton="neutral" (click)="selectedTab = secondPage">Next</button>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template ngl-tab nglTabId="secondPage" #secondPage="nglTab">
+        <div>
+          <p>Page 2</p>
+          <h3>Edit Item:  {{ data && data.field2 }} </h3>
+          <p>Please fill up the following: "all mandatory fields"</p>
+          <hr />
+          <div class="form-container">
+            <ngl-form-element label="Please Select" class="slds-m-top--small">
+              <select nglFormControl class="slds-select" formControlName="field4" [required]="false">
+                <option value="default-1">Menu Item One</option>
+                <option value="default-2">Menu Item Two</option>
+                <option value="default-3">Menu Item Three</option>
+                <option value="default-4">Menu Item Four</option>
+              </select>
+            </ngl-form-element>
+
+            <ngl-form-element label="Please Select" class="slds-m-top--small">
+              <div class="checkbox-wrapper">
+                <ngl-form-checkbox label="Client" style="display: inline-block;">
+                  <input nglFormControl formControlName="client" type="checkbox" />
+                </ngl-form-checkbox>
+                <ngl-form-checkbox label="New Member" style="display: inline-block;">
+                  <input nglFormControl formControlName="newMember" type="checkbox" />
+                </ngl-form-checkbox>
+              </div>
+            </ngl-form-element>
+
+            <ngl-form-element label="Please Select" class="slds-m-top--small">
+              <input nglFormControl type="text" formControlName="field7" placeholder="Text" [required]="false">
+            </ngl-form-element>
+
+            <ngl-form-element label="Please Select" class="slds-m-top--small">
+              <select nglFormControl class="slds-select" formControlName="field8" [required]="false">
+                <option value="combo-box1">Combo Box One</option>
+                <option value="combo-box2">Combo Box Two</option>
+                <option value="combo-box3">Combo Box Three</option>
+                <option value="combo-box4">Combo Box Four</option>
+              </select>
+            </ngl-form-element>
+          </div>
+        </div>
+        <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
+          <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+        </div>
+        <div class="controls">
+          <div class="space-between">
+            <button type="button" nglButton="neutral" (click)="selectedTab = firstPage">Prev</button>
+            <button type="button" [disabled]="isRequesting" nglButton="neutral" (click)="submitForm()">Update</button>
+          </div>
+        </div>
+      </ng-template>
+    </ngl-tabs>
+  </form>
