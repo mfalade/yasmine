@@ -29,14 +29,34 @@ export class AddDataComponent implements OnInit {
 
   ngOnInit() {
     this.dataForm = this._formBuilder.group({
-      field1: ['default-1'],
-      field2: [''],
-      field3: ['default-1'],
-      field4: ['default-1'],
+      appId: ['default-1'],
+      name: [''],
+      environment: ['default-1'],
+      requestType: ['default-1'],
       client: [false],
-      newMember: [false],
-      field7: [''],
-      field8: ['combo-box1']
+      vip: [false],
+      professionalStatus: ['combo-box1'],
+      universityStaffYes: [true],
+      universityStaffNo: [false],
+      status: ['Sir'],
+      plainText1: ['default-1'],
+      plainText2: [''],
+      plainText3: [''],
+      plainText4: [''],
+      plainText5: [''],
+      plainText6: [''],
+      plainText7: [''],
+      plainText8: [''],
+      plainText9: [''],
+      plainText10: ['default-1'],
+      plainText11: [''],
+      plainText12: [''],
+      plainText13: ['default-1'],
+      plainText14: ['default-1'],
+      plainText15: [''],
+      plainText16: ['default-1'],
+      plainText17: ['default-1'],
+      plainText18: ['default-1'],
     });
   }
 
