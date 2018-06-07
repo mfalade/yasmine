@@ -32,14 +32,34 @@ export class EditItemComponent implements OnInit {
 
   ngOnInit() {
     this.dataForm = this._formBuilder.group({
-      field1: [''],
-      field2: [''],
-      field3: [''],
-      field4: [''],
+      appId: [''],
+      name: [''],
+      environment: [''],
+      requestType: [''],
       client: [false],
-      newMember: [false],
-      field7: [''],
-      field8: ['']
+      vip: [false],
+      professionalStatus: [''],
+      universityStaffYes: [true],
+      universityStaffNo: [false],
+      status: [''],
+      plainText1: [''],
+      plainText2: [''],
+      plainText3: [''],
+      plainText4: [''],
+      plainText5: [''],
+      plainText6: [''],
+      plainText7: [''],
+      plainText8: [''],
+      plainText9: [''],
+      plainText10: [''],
+      plainText11: [''],
+      plainText12: [''],
+      plainText13: [''],
+      plainText14: [''],
+      plainText15: [''],
+      plainText16: [''],
+      plainText17: [''],
+      plainText18: [''],
     });
     this.fetchData();
   }

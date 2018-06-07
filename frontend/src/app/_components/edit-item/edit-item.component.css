@@ -15,10 +15,10 @@
 .form-container input,
 .form-container select,
 .checkbox-wrapper {
-  margin-left: 70px;
+  margin-left: 0px;
   margin-top: 10px;
   margin-bottom: 20px;
-  max-width: 430px;
+  max-width: 250px;
 }
 
 .checkbox-wrapper {
@@ -28,4 +28,13 @@
 
 h3 {
   font-size: 1.75rem!important;
+}
+
+.double-col-container {
+  display: table;
+  width: 100%;
+}
+
+.double-col-container .col-6 {
+  display: table-cell;
 }
