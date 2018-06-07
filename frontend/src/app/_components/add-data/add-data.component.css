@@ -38,3 +38,9 @@ h3 {
 .double-col-container .col-6 {
   display: table-cell;
 }
+
+ng-template {
+  height: 500px;
+  display: grid;
+  grid-template-row: 5fr 1fr
+}

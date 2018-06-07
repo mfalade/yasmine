@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { RequestService } from '../../_services/request.service';
+import { StoreService } from '../../_services/store.service';
+import { generateUniqueId } from '../../_shared/utils';
 
 @Component({
   selector: 'app-add-data',
@@ -16,13 +18,7 @@ export class AddDataComponent implements OnInit {
   public showSuccessMessage = false;
   public showErrorMessage = false;
   public isRequesting = false;
-  public isSaved = false;
-  public dataList: any[] = [];
-  public requestForm: FormGroup;
-  public showModal: boolean;
-  public stagedItem: any;
-  public loading = true;
-  public deleteItemError: any;
+  public showPageOneExtraFields = false;
 
   public type = 'default';
   public id = 0;
@@ -31,19 +27,17 @@ export class AddDataComponent implements OnInit {
   constructor(
     private _router: Router,
     private _formBuilder: FormBuilder,
+    private _storeService: StoreService,
     private _requestService: RequestService
   ) { }
 
   ngOnInit() {
     this.dataForm = this._formBuilder.group({
-      appId: ['default-1'],
-      name: [''],
-      environment: ['default-1'],
-      requestType: ['default-1'],
+      requestType: ['first-user'],
       client: [false],
       vip: [false],
       professionalStatus: ['combo-box1'],
-      universityStaffYes: [true],
+      universityStaffYes: [false],
       universityStaffNo: [false],
       status: ['Sir'],
       plainText1: ['default-1'],
@@ -112,8 +106,40 @@ export class AddDataComponent implements OnInit {
     );
   }
 
+  handleRequestTypeChange({ target }) {
+    if (target.value !== 'client-vip') {
+      this.dataForm.patchValue({
+        client: false,
+        vip: false,
+        universityStaffYes: false,
+        universityStaffNo: false
+      });
+      this.showPageOneExtraFields = false;
+      return;
+    }
+    this.showPageOneExtraFields = true;
+  }
+
   submitForm() {
     this.isRequesting = true;
+    const studentRequest = {
+      ...this.dataForm.value,
+      requestId: generateUniqueId(),
+      studentId: `student_${generateUniqueId().substring(0, 6)}`,
+    };
+
+    this._storeService.addStudentRequest(studentRequest);
+
+    this.isRequesting = false;
+    this.showSuccessMessage = true;
+    this.resetForm();
+
+    setTimeout(() => {
+      this._router.navigateByUrl('/');
+    }, 2000);
+  }
+
+  saveToDb() {
     this._requestService.post('data', this.dataForm.value).subscribe(
       res => {
         this.isRequesting = false;

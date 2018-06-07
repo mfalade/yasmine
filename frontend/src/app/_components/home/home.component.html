@@ -1,0 +1,99 @@
+<form [formGroup]="requestForm" class="container">
+    <div>
+      <h3>Request</h3>
+      <p>Please fill up all required fields</p>
+      <hr />
+      <div class="form-container">
+        <ngl-form-element label="App ID" class="slds-m-top--small">
+          <select nglFormControl class="slds-select" formControlName="appId" [required]="false">
+            <option value="default-1">12345</option>
+            <option value="default-2">MenuItem Two</option>
+            <option value="default-3">MenuItem Three</option>
+          </select>
+        </ngl-form-element>
+
+        <ngl-form-element label="Name" class="slds-m-top--small">
+          <input nglFormControl type="text" formControlName="name" placeholder="Fill up.." [required]="false">
+        </ngl-form-element>
+
+        <ngl-form-element label="Environment" class="slds-m-top--small">
+          <select nglFormControl class="slds-select" formControlName="environment" [required]="false">
+            <option value="default-1">Yes (by Default)</option>
+            <option value="default-2">MenuItem Two</option>
+            <option value="default-3">MenuItem Three</option>
+          </select>
+        </ngl-form-element>
+      </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <div class="data-list-header">
+      <h3>Request list</h3>
+      <p>Add a new student</p>
+      <button (click)="addNewItem()" type="button" nglButton="neutral">Add New</button>
+      <button type="button" nglButton="neutral">Export Excel File</button>
+    </div>
+
+    <div class="data-table-container">
+      <table ngl-datatable [data]="dataList" trackByKey="rank" [loading]="loading" class="slds-max-medium-table--stacked-horizontal">
+        <ngl-datatable-column heading="Reference" key="reference"></ngl-datatable-column>
+        <ngl-datatable-column heading="Request Student" key="studentId"></ngl-datatable-column>
+        <ngl-datatable-column heading="Field" key="field3"></ngl-datatable-column>
+        <ngl-datatable-column heading="Details" key="field4"></ngl-datatable-column>
+        <ngl-datatable-column heading="" key="" cellClass="slds-truncate" sortable>
+          <ng-template nglDatatableCell let-row="row">
+            <button (click)="editData(row)" type="button" nglButton="neutral">Edit</button>
+          </ng-template>
+        </ngl-datatable-column>
+        <ngl-datatable-column heading="" key="" cellClass="slds-truncate" sortable>
+          <ng-template nglDatatableCell let-row="row">
+            <button (click)="stageItemForDeletion(row)" type="button" nglButton="destructive">Delete</button>
+          </ng-template>
+        </ngl-datatable-column>
+
+        <ng-template nglLoadingOverlay>
+          <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">Loading...</div>
+        </ng-template>
+
+        <ng-template nglNoRowsOverlay>No request student available!</ng-template>
+      </table>
+    </div>
+
+    <div class="request-form-footer">
+      <ngl-form-checkbox-toggle label="Remarks" class="slds-m-top--small">
+        <input nglFormControl type="checkbox" formControlName="remarks" />
+      </ngl-form-checkbox-toggle>
+      <div class="request-form-footer--controls">
+          <button (click)="showCancelRequestModal = true" type="button" nglButton="destructive">Cancel</button>
+          <button type="button" nglButton="neutral">Save</button>
+          <button type="button" nglButton="success">Send</button>
+      </div>
+    </div>
+  </form>
+
+
+  <ngl-modal [header]="'Delete ' + stagedItem?.field2" [(open)]="showModal" [directional]="true">
+    <div body class="modal-body">
+      <h4>Are you sure you want to delete this item ?</h4>
+      <h5>This action is irreversible</h5>
+      <p class="error-text" [ngClass]="{'active': deleteItemError}">Failed to delete item.</p>
+    </div>
+    <ng-template ngl-modal-footer>
+      <button class="slds-button slds-button--neutral" (click)="showModal = deleteItemError = false">Cancel</button>
+      <button (click)="confirmDelete()" type="button" nglButton="destructive">Delete</button>
+    </ng-template>
+  </ngl-modal>
+
+  <ngl-modal [header]="'Cancel request'" [(open)]="showCancelRequestModal" [directional]="true">
+    <div body class="modal-body">
+      <h4>Are you sure you want to cancel this request ?</h4>
+      <h5>All data would be lost</h5>
+    </div>
+    <ng-template ngl-modal-footer>
+      <button class="slds-button slds-button--neutral" (click)="showCancelRequestModal = false">No, dismiss this modal</button>
+      <button (click)="confirmCancelRequest()" type="button" nglButton="destructive">Proceed, cancel the request</button>
+    </ng-template>
+  </ngl-modal>

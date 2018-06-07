@@ -47,3 +47,7 @@
 .slds-tabs--default__nav {
   display: none!important;
 }
+
+.slds-menu__item {
+  margin-bottom: 20px;
+}
