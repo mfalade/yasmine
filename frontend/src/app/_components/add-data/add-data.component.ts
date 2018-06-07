@@ -16,6 +16,13 @@ export class AddDataComponent implements OnInit {
   public showSuccessMessage = false;
   public showErrorMessage = false;
   public isRequesting = false;
+  public isSaved = false;
+  public dataList: any[] = [];
+  public requestForm: FormGroup;
+  public showModal: boolean;
+  public stagedItem: any;
+  public loading = true;
+  public deleteItemError: any;
 
   public type = 'default';
   public id = 0;
@@ -58,6 +65,51 @@ export class AddDataComponent implements OnInit {
       plainText17: ['default-1'],
       plainText18: ['default-1'],
     });
+    this.initializeRequestForm();
+    this.fetchItems();
+  }
+
+
+  initializeRequestForm() {
+    this.requestForm = this._formBuilder.group({
+      appId: ['default-1'],
+      name: [''],
+      environment: ['default-1'],
+      remarks: [false],
+    });
+  }
+
+  fetchItems() {
+    this._requestService.get('data').subscribe(
+      res => {
+        this.dataList = res.data;
+        this.loading = false;
+      }, err => {
+        this.loading = false;
+    });
+  }
+
+  editData (data) {
+    const url = `/data/${data._id}/edit`;
+    this._router.navigateByUrl(url);
+  }
+
+  stageItemForDeletion (data) {
+    this.deleteItemError = null;
+    this.stagedItem = data;
+    this.showModal = true;
+  }
+
+  confirmDelete () {
+    const resource = `data/${this.stagedItem._id}`;
+    this._requestService.delete(resource).subscribe(
+      res => {
+        this.showModal = false;
+        this.deleteItemError = null;
+        this.fetchItems();
+      },
+      err => this.deleteItemError = err
+    );
   }
 
   submitForm() {
@@ -67,10 +119,11 @@ export class AddDataComponent implements OnInit {
         this.isRequesting = false;
         this.showSuccessMessage = true;
         this.resetForm();
+        this.isSaved = true;
 
-        setTimeout(() => {
-          this._router.navigateByUrl('/');
-        }, 2000);
+        // setTimeout(() => {
+        //   this._router.navigateByUrl('/');
+        // }, 2000);
       },
       err => {
         this.isRequesting = false;
@@ -79,6 +132,10 @@ export class AddDataComponent implements OnInit {
         this.showErrorMessage = true;
       }
     );
+  }
+
+  finalValidation() {
+    this._router.navigateByUrl('/');
   }
 
   resetForm() {
