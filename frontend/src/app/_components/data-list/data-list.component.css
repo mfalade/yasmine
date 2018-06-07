@@ -1,3 +1,15 @@
+.container {
+  width: 100%;
+}
+
+.data-table-container {
+  overflow: scroll;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
 h3 {
   font-size: 1.75rem!important;
 }
@@ -29,4 +41,15 @@ h3 {
 
 .data-list-header h3 {
   margin: 10px 0;
+}
+
+.request-form-footer {
+  width: 100%;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+.request-form-footer--controls {
+  justify-self: flex-end;
 }

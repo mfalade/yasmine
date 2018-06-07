@@ -4,14 +4,15 @@
 }
 
 .side-nav {
-  width: 250px;
-  height: 100vh;
+  min-height: 100vh;
   padding: 50px;
   border-right: 1px solid #d8dde6;
 }
 
-.inline {
-  display: flex;
+.page-wrapper {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 20% 80%;
 }
 
 .content-area {
@@ -19,7 +20,8 @@
 }
 
 .content-area--form-area {
-  width: 600px;
+  width: 80%;
+  /* margin: auto; */
 }
 
 .controls {
