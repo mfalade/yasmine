@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { RequestService } from '../../_services/request.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { RequestService } from '../../_services/request.service';
 })
 export class DataListComponent implements OnInit {
   public dataList: any[] = [];
+  public requestForm: FormGroup;
   public showModal: boolean;
   public stagedItem: any;
   public loading = true;
@@ -16,11 +18,22 @@ export class DataListComponent implements OnInit {
 
   constructor(
     private _requestService: RequestService,
+    private _formBuilder: FormBuilder,
     private _router: Router,
   ) { }
 
   ngOnInit() {
+    this.initializeRequestForm();
     this.fetchItems();
+  }
+
+  initializeRequestForm() {
+    this.requestForm = this._formBuilder.group({
+      appId: ['default-1'],
+      name: [''],
+      environment: ['default-1'],
+      remarks: [false],
+    });
   }
 
   fetchItems() {

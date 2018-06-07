@@ -1,396 +1,361 @@
 <div class="slds-notify_container">
-    <ngl-notification *ngIf="showSuccessMessage" type="alert" (nglNotificationClose)="showSuccessMessage = false" severity="success"
-      timeout="5000" class="slds-theme--alert-texture">
-      <h2>Item successfully created!</h2>
-    </ngl-notification>
-  </div>
-  <div class="slds-notify_container">
-    <ngl-notification *ngIf="showErrorMessage" type="alert" (nglNotificationClose)="showErrorMessage = false" severity="error"
-      timeout="5000" class="slds-theme--alert-texture">
-      <h2>Failed to create item! Reason: {{errorMessage}}</h2>
-    </ngl-notification>
-  </div>
+  <ngl-notification *ngIf="showSuccessMessage" type="alert" (nglNotificationClose)="showSuccessMessage = false" severity="success"
+    timeout="5000" class="slds-theme--alert-texture">
+    <h2>Item successfully created!</h2>
+  </ngl-notification>
+</div>
+<div class="slds-notify_container">
+  <ngl-notification *ngIf="showErrorMessage" type="alert" (nglNotificationClose)="showErrorMessage = false" severity="error"
+    timeout="5000" class="slds-theme--alert-texture">
+    <h2>Failed to create item! Reason: {{errorMessage}}</h2>
+  </ngl-notification>
+</div>
 
-  <form [formGroup]="dataForm">
-    <ngl-tabs [(selected)]="selectedTab" [type]="type">
-      <ng-template ngl-tab nglTabId="firstPage" #firstPage="nglTab">
-        <div>
-          <h3>Request Title - Page 1</h3>
-          <p>Please fill up all required fields</p>
-          <hr />
-          <div class="form-container">
-            <ngl-form-element label="App ID" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="appId" [required]="false">
-                <option value="default-1">12345</option>
-                <option value="default-2">MenuItem Two</option>
-                <option value="default-3">MenuItem Three</option>
-              </select>
-            </ngl-form-element>
+<form [formGroup]="dataForm">
+  <ngl-tabs [(selected)]="selectedTab" [type]="type">
+    <ng-template ngl-tab nglTabId="firstPage" #firstPage="nglTab">
+      <div>
+        <h3>Add New Student</h3>
+        <p>Please fill up the required fields:</p>
+        <hr />
+        <div class="form-container">
+          <ngl-form-element label="Request Type" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="requestType" [required]="false">
+              <option value="default-1">FirstUser</option>
+              <option value="default-2">NewUser</option>
+              <option value="default-3">Client / VIP</option>
+            </select>
+          </ngl-form-element>
 
-            <ngl-form-element label="Name" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="name" placeholder="Fill up.." [required]="false">
-            </ngl-form-element>
-
-            <ngl-form-element label="Environment" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="environment" [required]="false">
-                <option value="default-1">Yes (by Default)</option>
-                <option value="default-2">MenuItem Two</option>
-                <option value="default-3">MenuItem Three</option>
-              </select>
-            </ngl-form-element>
-          </div>
-        </div>
-        <div class="controls">
-          <div class="pull-right">
-            <button type="button" nglButton="neutral" (click)="selectedTab = secondPage">Next</button>
-          </div>
-        </div>
-      </ng-template>
-
-      <ng-template ngl-tab nglTabId="secondPage" #secondPage="nglTab">
-        <div>
-          <h3>Add New Student</h3>
-          <p>Please fill up the required fields:</p>
-          <hr />
-          <div class="form-container">
-            <ngl-form-element label="Request Type" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="requestType" [required]="false">
-                <option value="default-1">FirstUser</option>
-                <option value="default-2">NewUser</option>
-                <option value="default-3">Client / VIP</option>
-              </select>
-            </ngl-form-element>
-
-            <ngl-form-element label="Client Type" class="slds-m-top--small">
-              <div class="checkbox-wrapper">
-                <ngl-form-checkbox label="Client" style="display: inline-block;">
-                  <input nglFormControl formControlName="client" type="checkbox" />
-                </ngl-form-checkbox>
-                <ngl-form-checkbox label="VIP" style="display: inline-block;">
-                  <input nglFormControl formControlName="vip" type="checkbox" />
-                </ngl-form-checkbox>
-              </div>
-            </ngl-form-element>
-
-            <ngl-form-element label="Professional Status" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="professionalStatus" [required]="false">
-                <option value="combo-box1">Combo Box One</option>
-                <option value="combo-box2">Combo Box Two</option>
-                <option value="combo-box3">Combo Box Three</option>
-                <option value="combo-box4">Combo Box Four</option>
-              </select>
-            </ngl-form-element>
-            
-            <ngl-form-element label="University Staff?" class="slds-m-top--small">
-              <div class="checkbox-wrapper">
-                <ngl-form-checkbox label="Yes" style="display: inline-block;">
-                  <input nglFormControl formControlName="universityStaffYes" type="checkbox"/>
-                </ngl-form-checkbox>
-                <ngl-form-checkbox label="No" style="display: inline-block;">
-                  <input nglFormControl formControlName="universityStaffNo" type="checkbox"/>
-                </ngl-form-checkbox>
-              </div>
-            </ngl-form-element>
-            
-          </div>
-        </div>
-        <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
-          <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
-        </div>
-        <div class="controls">
-          <div class="space-between">
-            <button type="button" nglButton="neutral" (click)="selectedTab = firstPage">Prev</button>
-            <button type="button" nglButton="neutral" (click)="selectedTab = thirdPage">Next</button>
-          </div>
-        </div>
-      </ng-template>
-      
-      <ng-template ngl-tab nglTabId="thirdPage" #thirdPage="nglTab">
-        <div>
-          <p>Please fill up the required fields:</p>
-          <hr />
-          <div class="double-col-container">
-            <div class="form-container col-6">
-              <ngl-form-element label="Status" class="slds-m-top--small">
-                <select nglFormControl class="slds-select" formControlName="status" [required]="false">
-                  <option value="Sir">Sir</option>
-                  <option value="Mrs">Mrs</option>
-                  <option value="Miss">Miss</option>
-                </select>
-              </ngl-form-element>
-              
+          <ngl-form-element label="Client Type" class="slds-m-top--small">
+            <div class="checkbox-wrapper">
+              <ngl-form-checkbox label="Client" style="display: inline-block;">
+                <input nglFormControl formControlName="client" type="checkbox" />
+              </ngl-form-checkbox>
+              <ngl-form-checkbox label="VIP" style="display: inline-block;">
+                <input nglFormControl formControlName="vip" type="checkbox" />
+              </ngl-form-checkbox>
             </div>
+          </ngl-form-element>
 
-            <div class="form-container col-6">
-              Plain text
-              
+          <ngl-form-element label="Professional Status" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="professionalStatus" [required]="false">
+              <option value="combo-box1">Combo Box One</option>
+              <option value="combo-box2">Combo Box Two</option>
+              <option value="combo-box3">Combo Box Three</option>
+              <option value="combo-box4">Combo Box Four</option>
+            </select>
+          </ngl-form-element>
+
+          <ngl-form-element label="University Staff?" class="slds-m-top--small">
+            <div class="checkbox-wrapper">
+              <ngl-form-checkbox label="Yes" style="display: inline-block;">
+                <input nglFormControl formControlName="universityStaffYes" type="checkbox" />
+              </ngl-form-checkbox>
+              <ngl-form-checkbox label="No" style="display: inline-block;">
+                <input nglFormControl formControlName="universityStaffNo" type="checkbox" />
+              </ngl-form-checkbox>
             </div>
-          </div>
-          
+          </ngl-form-element>
+
         </div>
-        <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
-          <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+      </div>
+      <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
+        <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+      </div>
+      <div class="controls">
+        <div class="space-between">
+          <span></span>
+          <button type="button" nglButton="neutral" (click)="selectedTab = secondPage">Next</button>
         </div>
-        <div class="controls">
-          <div class="space-between">
-            <button type="button" nglButton="neutral" (click)="selectedTab = secondPage">Prev</button>
-            <button type="button" nglButton="neutral" (click)="selectedTab = fourthPage">Next</button>            
-          </div>
-        </div>
-      </ng-template>
-      
-      <ng-template ngl-tab nglTabId="fourthPage" #fourthPage="nglTab">
+      </div>
+    </ng-template>
+
+    <ng-template ngl-tab nglTabId="secondPage" #secondPage="nglTab">
+      <div>
+        <p>Please fill up the required fields:</p>
+        <hr />
         <div class="double-col-container">
           <div class="form-container col-6">
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText1" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
+            <ngl-form-element label="Status" class="slds-m-top--small">
+              <select nglFormControl class="slds-select" formControlName="status" [required]="false">
+                <option value="Sir">Sir</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Miss">Miss</option>
               </select>
             </ngl-form-element>
-            
-            <ngl-form-element class="slds-m-top--small">
-              <div class="checkbox-wrapper">
-                <ngl-form-checkbox label="Radio Button" style="display: inline-block;">
-                  <input nglFormControl formControlName="client" type="checkbox" />
-                </ngl-form-checkbox>
-                <ngl-form-checkbox label="Radio button" style="display: inline-block;">
-                  <input nglFormControl formControlName="vip" type="checkbox" />
-                </ngl-form-checkbox>
-              </div>
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText2" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText3" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
+
           </div>
 
           <div class="form-container col-6">
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText4" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText5" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText6" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText7" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText8" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText9" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
+            Plain text
+
           </div>
         </div>
-        <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
-          <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+
+      </div>
+      <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
+        <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+      </div>
+      <div class="controls">
+        <div class="space-between">
+          <button type="button" nglButton="neutral" (click)="selectedTab = firstPage">Prev</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = thirdPage">Next</button>
         </div>
-        <div class="controls">
-          <div class="space-between">
-            <button type="button" nglButton="neutral" (click)="selectedTab = thirdPage">Prev</button>
-            <button type="button" nglButton="neutral" (click)="selectedTab = fifthPage">Next</button> 
-          </div>
+      </div>
+    </ng-template>
+
+    <ng-template ngl-tab nglTabId="thirdPage" #thirdPage="nglTab">
+      <div class="double-col-container">
+        <div class="form-container col-6">
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText1" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
+
+          <ngl-form-element class="slds-m-top--small">
+            <div class="checkbox-wrapper">
+              <ngl-form-checkbox label="Radio Button" style="display: inline-block;">
+                <input nglFormControl formControlName="client" type="checkbox" />
+              </ngl-form-checkbox>
+              <ngl-form-checkbox label="Radio button" style="display: inline-block;">
+                <input nglFormControl formControlName="vip" type="checkbox" />
+              </ngl-form-checkbox>
+            </div>
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText2" placeholder="Text box" [required]="false">
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText3" placeholder="Text box" [required]="false">
+          </ngl-form-element>
+
         </div>
-      </ng-template>
-      
-      <ng-template ngl-tab nglTabId="fifthPage" #fifthPage="nglTab">
-        <div class="double-col-container">
-          <div class="form-container col-6">
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText10" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
-            
-            <ngl-form-element class="slds-m-top--small">
-              <div class="checkbox-wrapper">
-                <ngl-form-checkbox label="Radio Button" style="display: inline-block;">
-                  <input nglFormControl formControlName="client" type="checkbox" />
-                </ngl-form-checkbox>
-                <ngl-form-checkbox label="Radio button" style="display: inline-block;">
-                  <input nglFormControl formControlName="vip" type="checkbox" />
-                </ngl-form-checkbox>
-              </div>
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText11" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText12" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
-          </div>
 
-          <div class="form-container col-6">
+        <div class="form-container col-6">
 
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText13" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText4" placeholder="Text box" [required]="false">
+          </ngl-form-element>
 
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText14" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText15" placeholder="Text box" [required]="false">
-            </ngl-form-element>
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText5" placeholder="Text box" [required]="false">
+          </ngl-form-element>
 
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText16" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText6" placeholder="Text box" [required]="false">
+          </ngl-form-element>
 
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText17" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText7" placeholder="Text box" [required]="false">
+          </ngl-form-element>
 
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText18" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
-            
-          </div>
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText8" placeholder="Text box" [required]="false">
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText9" placeholder="Text box" [required]="false">
+          </ngl-form-element>
+
         </div>
-        <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
-          <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+      </div>
+      <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
+        <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+      </div>
+      <div class="controls">
+        <div class="space-between">
+          <button type="button" nglButton="neutral" (click)="selectedTab = secondPage">Prev</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = fourthPage">Next</button>
         </div>
-        <div class="controls">
-          <div class="space-between">
-            <button type="button" nglButton="neutral" (click)="selectedTab = fourthPage">Prev</button>
-            <button type="button" nglButton="neutral" (click)="selectedTab = sixthPage">Next</button>            
-          </div>
+      </div>
+    </ng-template>
+
+    <ng-template ngl-tab nglTabId="fourthPage" #fourthPage="nglTab">
+      <div class="double-col-container">
+        <div class="form-container col-6">
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText10" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
+
+          <ngl-form-element class="slds-m-top--small">
+            <div class="checkbox-wrapper">
+              <ngl-form-checkbox label="Radio Button" style="display: inline-block;">
+                <input nglFormControl formControlName="client" type="checkbox" />
+              </ngl-form-checkbox>
+              <ngl-form-checkbox label="Radio button" style="display: inline-block;">
+                <input nglFormControl formControlName="vip" type="checkbox" />
+              </ngl-form-checkbox>
+            </div>
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText11" placeholder="Text box" [required]="false">
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText12" placeholder="Text box" [required]="false">
+          </ngl-form-element>
+
         </div>
-      </ng-template>
-      
-      <ng-template ngl-tab nglTabId="sixthPage" #sixthPage="nglTab">
-        <div class="double-col-container">
-          <div class="form-container col-6">
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText10" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
-            
-            <ngl-form-element class="slds-m-top--small">
-              <div class="checkbox-wrapper">
-                <ngl-form-checkbox label="Radio Button" style="display: inline-block;">
-                  <input nglFormControl formControlName="client" type="checkbox" />
-                </ngl-form-checkbox>
-                <ngl-form-checkbox label="Radio button" style="display: inline-block;">
-                  <input nglFormControl formControlName="vip" type="checkbox" />
-                </ngl-form-checkbox>
-              </div>
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText11" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText12" placeholder="Text box" [required]="false">
-            </ngl-form-element>
-            
-          </div>
 
-          <div class="form-container col-6">
+        <div class="form-container col-6">
 
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText13" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText13" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
 
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText14" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
-            
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <input nglFormControl type="text" formControlName="plainText15" placeholder="Text box" [required]="false">
-            </ngl-form-element>
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText14" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
 
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText16" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText15" placeholder="Text box" [required]="false">
+          </ngl-form-element>
 
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText17" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText16" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
 
-            <ngl-form-element label="Plain text" class="slds-m-top--small">
-              <select nglFormControl class="slds-select" formControlName="plainText18" [required]="false">
-                <option value="default-1">MenuItem</option>
-                <option value="default-2">MenuItem</option>
-                <option value="default-3">MenuItem</option>
-              </select>
-            </ngl-form-element>
-            
-          </div>
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText17" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText18" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
+
         </div>
-        <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
-          <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+      </div>
+      <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
+        <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+      </div>
+      <div class="controls">
+        <div class="space-between">
+          <button type="button" nglButton="neutral" (click)="selectedTab = thirdPage">Prev</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = fifthPage">Next</button>
         </div>
-        <div class="controls">
-          <div class="space-between">
-            <button type="button" nglButton="neutral" (click)="selectedTab = fourthPage">Prev</button>
-            <button type="button" nglButton="neutral" (click)="selectedTab = sixthPage">Next</button>            
-            <button type="button" [disabled]="isRequesting" nglButton="neutral" (click)="submitForm()">Submit</button>
-          </div>
+      </div>
+    </ng-template>
+
+    <ng-template ngl-tab nglTabId="fifthPage" #fifthPage="nglTab">
+      <div class="double-col-container">
+        <div class="form-container col-6">
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText10" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
+
+          <ngl-form-element class="slds-m-top--small">
+            <div class="checkbox-wrapper">
+              <ngl-form-checkbox label="Radio Button" style="display: inline-block;">
+                <input nglFormControl formControlName="client" type="checkbox" />
+              </ngl-form-checkbox>
+              <ngl-form-checkbox label="Radio button" style="display: inline-block;">
+                <input nglFormControl formControlName="vip" type="checkbox" />
+              </ngl-form-checkbox>
+            </div>
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText11" placeholder="Text box" [required]="false">
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText12" placeholder="Text box" [required]="false">
+          </ngl-form-element>
+
         </div>
-      </ng-template>
-    </ngl-tabs>
-  </form>
+
+        <div class="form-container col-6">
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText13" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText14" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <input nglFormControl type="text" formControlName="plainText15" placeholder="Text box" [required]="false">
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText16" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText17" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
+
+          <ngl-form-element label="Plain text" class="slds-m-top--small">
+            <select nglFormControl class="slds-select" formControlName="plainText18" [required]="false">
+              <option value="default-1">MenuItem</option>
+              <option value="default-2">MenuItem</option>
+              <option value="default-3">MenuItem</option>
+            </select>
+          </ngl-form-element>
+
+        </div>
+      </div>
+      <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
+        <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+      </div>
+      <div class="controls">
+        <div class="space-between">
+          <button type="button" nglButton="neutral" (click)="selectedTab = fourthPage">Prev</button>
+          <button type="button" [disabled]="isRequesting" nglButton="neutral" (click)="submitForm()">Submit</button>
+        </div>
+      </div>
+    </ng-template>
+  </ngl-tabs>
+</form>
