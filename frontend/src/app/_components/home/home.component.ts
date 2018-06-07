@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   public stagedItem: any;
   public loading = false;
   public deleteItemError: any;
+  public showCancelRequestModal: boolean;
 
   constructor(
     private _requestService: RequestService,
@@ -67,6 +68,17 @@ export class HomeComponent implements OnInit {
     this.deleteItemError = null;
     this.stagedItem = data;
     this.showModal = true;
+  }
+
+  confirmCancelRequest() {
+    this.requestForm.reset({
+      appId: 'default-1',
+      name: '',
+      environment: 'default-1',
+      remarks: false
+    });
+    this._storeService.clearAll();
+    this.showCancelRequestModal = false;
   }
 
   confirmDelete () {

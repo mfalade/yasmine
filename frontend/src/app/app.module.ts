@@ -13,6 +13,7 @@ import { DataListComponent } from './_components/data-list/data-list.component';
 import { EditItemComponent } from './_components/edit-item/edit-item.component';
 import { AddDataComponent } from './_components/add-data/add-data.component';
 import { HomeComponent } from './_components/home/home.component';
+import { RequestsComponent } from './_components/requests/requests.component';
 
 
 export const appRoutes: Routes = [
@@ -20,6 +21,7 @@ export const appRoutes: Routes = [
   { path: 'data/create', component: AddDataComponent },
   { path: 'data/:id/edit', component: EditItemComponent },
   { path: 'users', component: DataListComponent },
+  { path: 'requests', component: RequestsComponent },
   { path: '*', redirectTo: '/' },
 ];
 
@@ -29,7 +31,8 @@ export const appRoutes: Routes = [
     DataListComponent,
     EditItemComponent,
     AddDataComponent,
-    HomeComponent
+    HomeComponent,
+    RequestsComponent
   ],
   imports: [
     RouterModule.forRoot(
