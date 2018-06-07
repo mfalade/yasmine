@@ -20,44 +20,45 @@
         <hr />
         <div class="form-container">
           <ngl-form-element label="Request Type" class="slds-m-top--small">
-            <select nglFormControl class="slds-select" formControlName="requestType" [required]="false">
-              <option value="default-1">FirstUser</option>
-              <option value="default-2">NewUser</option>
-              <option value="default-3">Client / VIP</option>
+            <select nglFormControl class="slds-select" formControlName="requestType" (change)="handleRequestTypeChange($event)" [required]="false">
+              <option value="first-user">First User</option>
+              <option value="new-user">New User</option>
+              <option value="client-vip">Client / VIP</option>
             </select>
           </ngl-form-element>
 
-          <ngl-form-element label="Client Type" class="slds-m-top--small">
-            <div class="checkbox-wrapper">
-              <ngl-form-checkbox label="Client" style="display: inline-block;">
-                <input nglFormControl formControlName="client" type="checkbox" />
-              </ngl-form-checkbox>
-              <ngl-form-checkbox label="VIP" style="display: inline-block;">
-                <input nglFormControl formControlName="vip" type="checkbox" />
-              </ngl-form-checkbox>
-            </div>
-          </ngl-form-element>
+          <div *ngIf="showPageOneExtraFields">
+            <ngl-form-element label="Client Type" class="slds-m-top--small">
+              <div class="checkbox-wrapper">
+                <ngl-form-checkbox label="Client" style="display: inline-block;">
+                  <input nglFormControl formControlName="client" type="checkbox" />
+                </ngl-form-checkbox>
+                <ngl-form-checkbox label="VIP" style="display: inline-block;">
+                  <input nglFormControl formControlName="vip" type="checkbox" />
+                </ngl-form-checkbox>
+              </div>
+            </ngl-form-element>
 
-          <ngl-form-element label="Professional Status" class="slds-m-top--small">
-            <select nglFormControl class="slds-select" formControlName="professionalStatus" [required]="false">
-              <option value="combo-box1">Combo Box One</option>
-              <option value="combo-box2">Combo Box Two</option>
-              <option value="combo-box3">Combo Box Three</option>
-              <option value="combo-box4">Combo Box Four</option>
-            </select>
-          </ngl-form-element>
+            <ngl-form-element label="Professional Status" class="slds-m-top--small">
+              <select nglFormControl class="slds-select" formControlName="professionalStatus" [required]="false">
+                <option value="combo-box1">Combo Box One</option>
+                <option value="combo-box2">Combo Box Two</option>
+                <option value="combo-box3">Combo Box Three</option>
+                <option value="combo-box4">Combo Box Four</option>
+              </select>
+            </ngl-form-element>
 
-          <ngl-form-element label="University Staff?" class="slds-m-top--small">
-            <div class="checkbox-wrapper">
-              <ngl-form-checkbox label="Yes" style="display: inline-block;">
-                <input nglFormControl formControlName="universityStaffYes" type="checkbox" />
-              </ngl-form-checkbox>
-              <ngl-form-checkbox label="No" style="display: inline-block;">
-                <input nglFormControl formControlName="universityStaffNo" type="checkbox" />
-              </ngl-form-checkbox>
-            </div>
-          </ngl-form-element>
-
+            <ngl-form-element label="University Staff?" class="slds-m-top--small">
+              <div class="checkbox-wrapper">
+                <ngl-form-checkbox label="Yes" style="display: inline-block;">
+                  <input nglFormControl formControlName="universityStaffYes" type="checkbox" />
+                </ngl-form-checkbox>
+                <ngl-form-checkbox label="No" style="display: inline-block;">
+                  <input nglFormControl formControlName="universityStaffNo" type="checkbox" />
+                </ngl-form-checkbox>
+              </div>
+            </ngl-form-element>
+          </div>
         </div>
       </div>
       <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
@@ -99,7 +100,7 @@
       </div>
       <div class="controls">
         <div class="space-between">
-          <button type="button" nglButton="neutral" (click)="selectedTab = firstPage">Prev</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = firstPage">Back</button>
           <button type="button" nglButton="neutral" (click)="selectedTab = thirdPage">Next</button>
         </div>
       </div>
@@ -170,7 +171,7 @@
       </div>
       <div class="controls">
         <div class="space-between">
-          <button type="button" nglButton="neutral" (click)="selectedTab = secondPage">Prev</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = secondPage">Back</button>
           <button type="button" nglButton="neutral" (click)="selectedTab = fourthPage">Next</button>
         </div>
       </div>
@@ -261,7 +262,7 @@
       </div>
       <div class="controls">
         <div class="space-between">
-          <button type="button" nglButton="neutral" (click)="selectedTab = thirdPage">Prev</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = thirdPage">Back</button>
           <button type="button" nglButton="neutral" (click)="selectedTab = fifthPage">Next</button>
         </div>
       </div>
@@ -352,8 +353,8 @@
       </div>
       <div class="controls">
         <div class="space-between">
-          <button type="button" nglButton="neutral" (click)="selectedTab = fourthPage">Prev</button>
-          <button type="button" [disabled]="isRequesting" nglButton="neutral" (click)="submitForm()">Submit</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = fourthPage">Back</button>
+          <button type="button" [disabled]="isRequesting" nglButton="neutral" (click)="submitForm()">Save</button>
         </div>
       </div>
     </ng-template>

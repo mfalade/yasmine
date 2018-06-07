@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { RequestService } from '../../_services/request.service';
+import { StoreService } from '../../_services/store.service';
 
 @Component({
   selector: 'app-home',
@@ -18,13 +19,14 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _requestService: RequestService,
+    private _storeService: StoreService,
     private _formBuilder: FormBuilder,
     private _router: Router,
   ) { }
 
   ngOnInit() {
     this.initializeRequestForm();
-    this.fetchItems();
+    this.getRequestStudents();
   }
 
   initializeRequestForm() {
@@ -37,13 +39,19 @@ export class HomeComponent implements OnInit {
   }
 
   fetchItems() {
-    // this._requestService.get('data').subscribe(
-    //   res => {
-    //     this.dataList = res.data;
-    //     this.loading = false;
-    //   }, err => {
-    //     this.loading = false;
-    // });
+    this._requestService.get('data').subscribe(
+      res => {
+        this.dataList = res.data;
+        this.loading = false;
+      }, err => {
+        this.loading = false;
+    });
+  }
+
+  getRequestStudents() {
+    this._storeService.studentRequests$.subscribe(students => {
+      this.dataList = students;
+    });
   }
 
   addNewItem()  {
@@ -51,7 +59,7 @@ export class HomeComponent implements OnInit {
   }
 
   editData (data) {
-    const url = `/data/${data._id}/edit`;
+    const url = `/data/${data.requestId}/edit`;
     this._router.navigateByUrl(url);
   }
 
@@ -62,10 +70,14 @@ export class HomeComponent implements OnInit {
   }
 
   confirmDelete () {
+    this._storeService.deleteRequest(this.stagedItem);
+    this.showModal = false;
+  }
+
+  deleteItemFromDb() {
     const resource = `data/${this.stagedItem._id}`;
     this._requestService.delete(resource).subscribe(
       res => {
-        this.showModal = false;
         this.deleteItemError = null;
         this.fetchItems();
       },

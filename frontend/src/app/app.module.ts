@@ -7,6 +7,7 @@ import { NglModule } from 'ng-lightning/ng-lightning';
 import { RouterModule, Routes } from '@angular/router';
 
 import { RequestService } from './_services/request.service';
+import { StoreService } from './_services/store.service';
 import { AppComponent } from './app.component';
 import { DataListComponent } from './_components/data-list/data-list.component';
 import { EditItemComponent } from './_components/edit-item/edit-item.component';
@@ -42,7 +43,7 @@ export const appRoutes: Routes = [
     ReactiveFormsModule,
     NglModule.forRoot()
   ],
-  providers: [HttpModule, RequestService],
+  providers: [HttpModule, RequestService, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
