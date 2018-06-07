@@ -34,11 +34,9 @@ export class AddDataComponent implements OnInit {
   ngOnInit() {
     this.dataForm = this._formBuilder.group({
       requestType: ['first-user'],
-      client: [false],
-      vip: [false],
+      clientType: ['vip'],
       professionalStatus: ['combo-box1'],
-      universityStaffYes: [false],
-      universityStaffNo: [false],
+      isUniversityStaff: ['no'],
       status: ['Sir'],
       plainText1: ['default-1'],
       plainText2: [''],
@@ -66,8 +64,7 @@ export class AddDataComponent implements OnInit {
       this.dataForm.patchValue({
         client: false,
         vip: false,
-        universityStaffYes: false,
-        universityStaffNo: false
+        isUniversityStaff: true,
       });
       this.showPageOneExtraFields = false;
       return;

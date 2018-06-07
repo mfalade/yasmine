@@ -35,12 +35,10 @@ export class EditItemComponent implements OnInit {
 
   ngOnInit() {
     this.dataForm = this._formBuilder.group({
-      requestType: [''],
-      client: [false],
-      vip: [false],
+      requestType: ['first-user'],
+      clientType: ['vip'],
+      isUniversityStaff: ['no'],
       professionalStatus: [''],
-      universityStaffYes: [true],
-      universityStaffNo: [false],
       status: [''],
       plainText1: [''],
       plainText2: [''],

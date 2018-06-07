@@ -44,3 +44,7 @@ ng-template {
   display: grid;
   grid-template-row: 5fr 1fr
 }
+
+.inline-flex {
+  display: inline-flex;
+}

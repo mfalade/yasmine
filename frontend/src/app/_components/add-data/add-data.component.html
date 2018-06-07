@@ -28,16 +28,16 @@
           </ngl-form-element>
 
           <div *ngIf="showPageOneExtraFields">
-            <ngl-form-element label="Client Type" class="slds-m-top--small">
-              <div class="checkbox-wrapper">
-                <ngl-form-checkbox label="Client" style="display: inline-block;">
-                  <input nglFormControl formControlName="client" type="checkbox" />
-                </ngl-form-checkbox>
-                <ngl-form-checkbox label="VIP" style="display: inline-block;">
-                  <input nglFormControl formControlName="vip" type="checkbox" />
-                </ngl-form-checkbox>
+            <fieldset ngl-form-group label="Client Types" [required]="false" class="inline slds-m-top--small">
+              <div class="inline-flex">
+                <ngl-form-group-element label="Client">
+                  <input nglFormControl type="radio" value="client" formControlName="clientType" />
+                </ngl-form-group-element>
+                <ngl-form-group-element label="VIP">
+                  <input nglFormControl type="radio" value="vip" formControlName="clientType" />
+                </ngl-form-group-element>
               </div>
-            </ngl-form-element>
+            </fieldset>
 
             <ngl-form-element label="Professional Status" class="slds-m-top--small">
               <select nglFormControl class="slds-select" formControlName="professionalStatus" [required]="false">
@@ -48,16 +48,16 @@
               </select>
             </ngl-form-element>
 
-            <ngl-form-element label="University Staff?" class="slds-m-top--small">
-              <div class="checkbox-wrapper">
-                <ngl-form-checkbox label="Yes" style="display: inline-block;">
-                  <input nglFormControl formControlName="universityStaffYes" type="checkbox" />
-                </ngl-form-checkbox>
-                <ngl-form-checkbox label="No" style="display: inline-block;">
-                  <input nglFormControl formControlName="universityStaffNo" type="checkbox" />
-                </ngl-form-checkbox>
+            <fieldset ngl-form-group label="University Staff?" [required]="false" class="inline slds-m-top--small">
+              <div class="inline-flex">
+                <ngl-form-group-element label="Yes">
+                  <input nglFormControl type="radio" value="yes" formControlName="isUniversityStaff" />
+                </ngl-form-group-element>
+                <ngl-form-group-element label="No">
+                  <input nglFormControl type="radio" value="no" formControlName="isUniversityStaff" />
+                </ngl-form-group-element>
               </div>
-            </ngl-form-element>
+            </fieldset>
           </div>
         </div>
       </div>
@@ -117,16 +117,16 @@
             </select>
           </ngl-form-element>
 
-          <ngl-form-element class="slds-m-top--small">
-            <div class="checkbox-wrapper">
-              <ngl-form-checkbox label="Radio Button" style="display: inline-block;">
-                <input nglFormControl formControlName="client" type="checkbox" />
-              </ngl-form-checkbox>
-              <ngl-form-checkbox label="Radio button" style="display: inline-block;">
-                <input nglFormControl formControlName="vip" type="checkbox" />
-              </ngl-form-checkbox>
+          <fieldset ngl-form-group label="Client Types" [required]="false" class="inline slds-m-top--small">
+            <div class="inline-flex">
+              <ngl-form-group-element label="Client">
+                <input nglFormControl type="radio" value="client" formControlName="clientType" />
+              </ngl-form-group-element>
+              <ngl-form-group-element label="VIP">
+                <input nglFormControl type="radio" value="vip" formControlName="clientType" />
+              </ngl-form-group-element>
             </div>
-          </ngl-form-element>
+          </fieldset>
 
           <ngl-form-element label="Plain text" class="slds-m-top--small">
             <input nglFormControl type="text" formControlName="plainText2" placeholder="Text box" [required]="false">
@@ -188,16 +188,16 @@
             </select>
           </ngl-form-element>
 
-          <ngl-form-element class="slds-m-top--small">
-            <div class="checkbox-wrapper">
-              <ngl-form-checkbox label="Radio Button" style="display: inline-block;">
-                <input nglFormControl formControlName="client" type="checkbox" />
-              </ngl-form-checkbox>
-              <ngl-form-checkbox label="Radio button" style="display: inline-block;">
-                <input nglFormControl formControlName="vip" type="checkbox" />
-              </ngl-form-checkbox>
+          <fieldset ngl-form-group label="Client Types" [required]="false" class="inline slds-m-top--small">
+            <div class="inline-flex">
+              <ngl-form-group-element label="Client">
+                <input nglFormControl type="radio" value="client" formControlName="clientType" />
+              </ngl-form-group-element>
+              <ngl-form-group-element label="VIP">
+                <input nglFormControl type="radio" value="vip" formControlName="clientType" />
+              </ngl-form-group-element>
             </div>
-          </ngl-form-element>
+          </fieldset>
 
           <ngl-form-element label="Plain text" class="slds-m-top--small">
             <input nglFormControl type="text" formControlName="plainText11" placeholder="Text box" [required]="false">
@@ -279,16 +279,16 @@
             </select>
           </ngl-form-element>
 
-          <ngl-form-element class="slds-m-top--small">
-            <div class="checkbox-wrapper">
-              <ngl-form-checkbox label="Radio Button" style="display: inline-block;">
-                <input nglFormControl formControlName="client" type="checkbox" />
-              </ngl-form-checkbox>
-              <ngl-form-checkbox label="Radio button" style="display: inline-block;">
-                <input nglFormControl formControlName="vip" type="checkbox" />
-              </ngl-form-checkbox>
+          <fieldset ngl-form-group label="Client Types" [required]="false" class="inline slds-m-top--small">
+            <div class="inline-flex">
+              <ngl-form-group-element label="Client">
+                <input nglFormControl type="radio" value="client" formControlName="clientType" />
+              </ngl-form-group-element>
+              <ngl-form-group-element label="VIP">
+                <input nglFormControl type="radio" value="vip" formControlName="clientType" />
+              </ngl-form-group-element>
             </div>
-          </ngl-form-element>
+          </fieldset>
 
           <ngl-form-element label="Plain text" class="slds-m-top--small">
             <input nglFormControl type="text" formControlName="plainText11" placeholder="Text box" [required]="false">
