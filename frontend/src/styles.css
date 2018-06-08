@@ -3,3 +3,59 @@
 ul.slds-tabs--default__nav {
   display: none!important;
 }
+
+.container {
+  width: 100%;
+}
+
+.data-table-container {
+  overflow: scroll;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.75rem!important;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.error-text {
+  color: #c23934;
+  height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  transition: margin-top .4s ease-in-out, height .3s ease-in-out .2s;
+}
+
+.error-text.active {
+  height: 20px;
+  margin-top: 40px;
+}
+
+.mbl {
+  margin-bottom: 40px !important;
+}
+
+.data-list-header {
+  margin-bottom: 20px;
+}
+
+.data-list-header h3 {
+  margin: 10px 0;
+}
+
+.request-form-footer {
+  width: 100%;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+.request-form-footer--controls {
+  justify-self: flex-end;
+}

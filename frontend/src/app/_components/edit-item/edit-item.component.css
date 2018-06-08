@@ -38,3 +38,7 @@ h3 {
 .double-col-container .col-6 {
   display: table-cell;
 }
+
+.inline-flex {
+  display: inline-flex;
+}

@@ -7,16 +7,21 @@ import { NglModule } from 'ng-lightning/ng-lightning';
 import { RouterModule, Routes } from '@angular/router';
 
 import { RequestService } from './_services/request.service';
+import { StoreService } from './_services/store.service';
 import { AppComponent } from './app.component';
 import { DataListComponent } from './_components/data-list/data-list.component';
 import { EditItemComponent } from './_components/edit-item/edit-item.component';
 import { AddDataComponent } from './_components/add-data/add-data.component';
+import { HomeComponent } from './_components/home/home.component';
+import { RequestsComponent } from './_components/requests/requests.component';
 
 
 export const appRoutes: Routes = [
-  { path: '', component: DataListComponent },
+  { path: '', component: HomeComponent },
   { path: 'data/create', component: AddDataComponent },
   { path: 'data/:id/edit', component: EditItemComponent },
+  { path: 'users', component: DataListComponent },
+  { path: 'requests', component: RequestsComponent },
   { path: '*', redirectTo: '/' },
 ];
 
@@ -25,7 +30,9 @@ export const appRoutes: Routes = [
     AppComponent,
     DataListComponent,
     EditItemComponent,
-    AddDataComponent
+    AddDataComponent,
+    HomeComponent,
+    RequestsComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -39,7 +46,7 @@ export const appRoutes: Routes = [
     ReactiveFormsModule,
     NglModule.forRoot()
   ],
-  providers: [HttpModule, RequestService],
+  providers: [HttpModule, RequestService, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
