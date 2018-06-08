@@ -51,8 +51,8 @@ export class StoreService {
   clearStudentsFromLocalStorage() {
     localStorage.removeItem('studentRequests');
   }
-  
-  clearAll(): void {
+
+  clearCache(): void {
     localStorage.removeItem('studentRequests');
     this.studentRequests$.next([]);
     this.studentRequests = [];

@@ -129,8 +129,6 @@ export class EditUserComponent implements OnInit {
 
     const data = {
       ...this.dataForm.value,
-      requestId: this.data.requestId,
-      studentId: this.data.studentId
     };
     this._storeService.updateRequest(data);
     this.updateItemInDb();

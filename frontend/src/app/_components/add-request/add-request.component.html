@@ -26,7 +26,7 @@
         </ngl-form-element>
 
         <ngl-form-element label="Name" class="slds-m-top--small">
-          <input nglFormControl type="text" formControlName="name" placeholder="Fill up.." [required]="false">
+          <input nglFormControl type="name" formControlName="name" placeholder="Fill up.." [required]="false">
         </ngl-form-element>
 
         <ngl-form-element label="Environment" class="slds-m-top--small">
@@ -44,7 +44,7 @@
     <br />
 
     <div class="data-list-header">
-      <h3>Request list</h3>
+      <h3>Students list</h3>
       <p>Add a new student</p>
       <button (click)="addNewItem()" type="button" nglButton="neutral">Add New</button>
       <button type="button" nglButton="neutral">Export Excel File</button>

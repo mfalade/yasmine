@@ -33,7 +33,7 @@ export class EditRequestComponent implements OnInit {
 
   ngOnInit() {
     this.initializeRequestForm();
-    this.getRequestStudents();
+    this.getRequestData();
   }
 
   initializeRequestForm() {
@@ -44,11 +44,10 @@ export class EditRequestComponent implements OnInit {
       remarks: [false],
       status: ['under_construction'],
       students: [[]],
-      requestId: ['']
     });
   }
 
-  getRequestStudents() {
+  getRequestData() {
     this._route.params.subscribe((params: Params) => {
       const resource = `requests/${params['id']}`;
       this._requestService.get(resource).subscribe(
@@ -65,7 +64,6 @@ export class EditRequestComponent implements OnInit {
   }
 
   addNewItem()  {
-    // this.requestForm.controls['requestID']
     this._router.navigateByUrl('/user/create');
   }
 
@@ -74,31 +72,25 @@ export class EditRequestComponent implements OnInit {
     this._router.navigateByUrl(url);
   }
 
-  submitRequest(requestStatus) {
-    const studentsId = this.dataList.map(user => user._id);
+  submitRequest(action) {
     this.loading = true;
+    const studentsId = this.dataList.map(user => user._id);
     this.requestForm.controls['students'].setValue(studentsId);
-    this.requestForm.controls['status'].setValue(requestStatus);
+    this.requestForm.controls['status'].setValue(action);
 
-    this.saveToDb();
-
-    this.loading = false;
-    this.showSuccessMessage = true;
-
-    setTimeout(() => {
-      this._router.navigateByUrl('/');
-    }, 2000);
+    this.updateRequestData();
   }
 
-  saveToDb() {
-    this._requestService.post('requests', this.requestForm.value).subscribe(
+  updateRequestData() {
+    const resource = `requests/${this.data._id}`;
+    this._requestService.put(resource, this.requestForm.value).subscribe(
       res => {
         this.loading = false;
         this.showSuccessMessage = true;
 
-        // setTimeout(() => {
-        //   this._router.navigateByUrl('/');
-        // }, 2000);
+        setTimeout(() => {
+          this._router.navigateByUrl('/');
+        }, 2000);
       },
       err => {
         this.loading = false;
@@ -122,7 +114,7 @@ export class EditRequestComponent implements OnInit {
       environment: 'default-1',
       remarks: false
     });
-    this._storeService.clearAll();
+    this._storeService.clearCache();
     this.showCancelRequestModal = false;
   }
 
@@ -136,7 +128,6 @@ export class EditRequestComponent implements OnInit {
     this._requestService.delete(resource).subscribe(
       res => {
         this.deleteItemError = null;
-        this.getRequestStudents();
       },
       err => this.deleteItemError = err
     );

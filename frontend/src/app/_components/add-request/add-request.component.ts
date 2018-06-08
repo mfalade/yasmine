@@ -42,7 +42,6 @@ export class AddRequestComponent implements OnInit {
       remarks: [false],
       status: ['under_construction'],
       students: [[]],
-      requestId: ['']
     });
   }
 
@@ -51,7 +50,7 @@ export class AddRequestComponent implements OnInit {
       this.dataList = students;
     });
   }
-  
+
   getRequests() {
     this._storeService.studentRequests$.subscribe(students => {
       this.dataList = students;
@@ -59,7 +58,6 @@ export class AddRequestComponent implements OnInit {
   }
 
   addNewItem()  {
-    // this.requestForm.controls['requestID']
     this._router.navigateByUrl('/user/create');
   }
 
@@ -77,7 +75,7 @@ export class AddRequestComponent implements OnInit {
       res => {
         this.loading = false;
         this.showSuccessMessage = true;
-        this._storeService.clearAll();
+        this._storeService.clearCache();
 
         setTimeout(() => {
           this._router.navigateByUrl('/');
@@ -105,7 +103,7 @@ export class AddRequestComponent implements OnInit {
       environment: 'default-1',
       remarks: false
     });
-    this._storeService.clearAll();
+    this._storeService.clearCache();
     this.showCancelRequestModal = false;
   }
 

@@ -44,7 +44,7 @@
     <br />
 
     <div class="data-list-header">
-      <h3>Request list</h3>
+      <h3>Students list</h3>
       <p>Add a new student</p>
       <button (click)="addNewItem()" type="button" nglButton="neutral">Add New</button>
       <button type="button" nglButton="neutral">Export Excel File</button>
@@ -52,11 +52,11 @@
 
     <div class="data-table-container">
       <table ngl-datatable [data]="dataList" trackByKey="rank" [loading]="loading" class="slds-max-medium-table--stacked-horizontal">
-        <ngl-datatable-column heading="Reference" key="reference"></ngl-datatable-column>
-        <ngl-datatable-column heading="Request Student" key=""></ngl-datatable-column>
+        <ngl-datatable-column heading="Reference" key="name"></ngl-datatable-column>
+        <ngl-datatable-column heading="Request Student" key="name"></ngl-datatable-column>
         <ngl-datatable-column heading="Field" key="field3"></ngl-datatable-column>
         <ngl-datatable-column heading="Details" key="field4"></ngl-datatable-column>
-        <ngl-datatable-column heading="" key="" cellClass="slds-truncate" sortable>
+        <ngl-datatable-column heading="" key="name" cellClass="slds-truncate" sortable>
           <ng-template nglDatatableCell let-row="row">
             <button (click)="editData(row)" type="button" nglButton="neutral">Edit</button>
           </ng-template>
@@ -80,7 +80,7 @@
         <input nglFormControl type="checkbox" formControlName="remarks" />
       </ngl-form-checkbox-toggle>
       <div class="request-form-footer--controls">
-          <button (click)="showCancelRequestModal = true" type="button" nglButton="destructive">Cancel</button>
+          <button *ngIf="data?.status !== 'sent'" (click)="showCancelRequestModal = true" type="button" nglButton="destructive">Cancel</button>
           <button type="button" nglButton="neutral" (click)="submitRequest('saved')">Save</button>
           <button type="button" nglButton="success" (click)="submitRequest('sent')">Send</button>
       </div>
