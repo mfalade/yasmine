@@ -1,4 +1,4 @@
-import { bindModelActions } from '../routes/base';
+import { bindModelActions } from './base';
 
 const RequestModel = db => {
   const Model = db.get('requests');  
