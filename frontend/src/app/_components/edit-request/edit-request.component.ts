@@ -70,7 +70,7 @@ export class EditRequestComponent implements OnInit {
   }
 
   editData (data) {
-    const url = `/user/${data}/edit`;
+    const url = `/user/${data._id}/edit`;
     this._router.navigateByUrl(url);
   }
 
