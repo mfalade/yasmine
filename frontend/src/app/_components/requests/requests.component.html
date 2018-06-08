@@ -1,3 +1,50 @@
-<p>
-  requests works!
-</p>
+<div class="data-list-header">
+  <h3>Summary Table of all Requests</h3>
+  <p>Find below all your requests</p>
+  <button (click)="addNewRequest()" type="button" nglButton="neutral">Add New</button>
+</div>
+
+<div class="data-table-container">
+  <table ngl-datatable [data]="dataList" trackByKey="rank" [loading]="loading" class="slds-max-medium-table--stacked-horizontal">
+    <ngl-datatable-column heading="Reference" key="_id"></ngl-datatable-column>
+    <ngl-datatable-column heading="Request Status" key="status"></ngl-datatable-column>
+    <ngl-datatable-column heading="Field" key="field"></ngl-datatable-column>
+    <ngl-datatable-column heading="Request Version" key="requestVersion"></ngl-datatable-column>
+    <ngl-datatable-column heading="" key="" cellClass="slds-truncate" sortable>
+      <ng-template nglDatatableCell let-row="row">
+        <button (click)="editRequest(row)" type="button" nglButton="neutral">Edit</button>
+        <button (click)="stageItemForDeletion(row)" type="button" nglButton="destructive">Delete</button>
+      </ng-template>
+    </ngl-datatable-column>
+    
+    <ng-template nglLoadingOverlay>
+      <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center">Loading...</div>
+    </ng-template>
+
+    <ng-template nglNoRowsOverlay>No data available in table!</ng-template>
+  </table>
+</div>
+
+
+<ngl-modal [header]="'Delete ' + stagedItem?.field2" [(open)]="showModal" [directional]="true">
+  <div body class="modal-body">
+    <h4>Are you sure you want to delete this item ?</h4>
+    <h5>This action is irreversible</h5>
+    <p class="error-text" [ngClass]="{'active': deleteItemError}">Failed to delete item.</p>
+  </div>
+  <ng-template ngl-modal-footer>
+    <button class="slds-button slds-button--neutral" (click)="showModal = deleteItemError = false">Cancel</button>
+    <button (click)="confirmDelete()" type="button" nglButton="destructive">Delete</button>
+  </ng-template>
+</ngl-modal>
+
+<ngl-modal [header]="'Cancel request'" [(open)]="showCancelRequestModal" [directional]="true">
+  <div body class="modal-body">
+    <h4>Are you sure you want to cancel this request ?</h4>
+    <h5>All data would be lost</h5>
+  </div>
+  <ng-template ngl-modal-footer>
+    <button class="slds-button slds-button--neutral" (click)="showCancelRequestModal = false">No, dismiss this modal</button>
+    <button (click)="confirmCancelRequest()" type="button" nglButton="destructive">Yes, cancel the request</button>
+  </ng-template>
+</ngl-modal>

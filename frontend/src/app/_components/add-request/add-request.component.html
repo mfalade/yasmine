@@ -1,3 +1,16 @@
+<div class="slds-notify_container">
+  <ngl-notification *ngIf="showSuccessMessage" type="alert" (nglNotificationClose)="showSuccessMessage = false" severity="success"
+    timeout="5000" class="slds-theme--alert-texture">
+    <h2>Request successfully created!</h2>
+  </ngl-notification>
+</div>
+<div class="slds-notify_container">
+  <ngl-notification *ngIf="showErrorMessage" type="alert" (nglNotificationClose)="showErrorMessage = false" severity="error"
+    timeout="5000" class="slds-theme--alert-texture">
+    <h2>Failed to create request! Reason: {{errorMessage}}</h2>
+  </ngl-notification>
+</div>
+
 <form [formGroup]="requestForm" class="container">
     <div>
       <h3>Request</h3>
@@ -40,7 +53,7 @@
     <div class="data-table-container">
       <table ngl-datatable [data]="dataList" trackByKey="rank" [loading]="loading" class="slds-max-medium-table--stacked-horizontal">
         <ngl-datatable-column heading="Reference" key="reference"></ngl-datatable-column>
-        <ngl-datatable-column heading="Request Student" key="studentId"></ngl-datatable-column>
+        <ngl-datatable-column heading="Request Student" key="_id"></ngl-datatable-column>
         <ngl-datatable-column heading="Field" key="field3"></ngl-datatable-column>
         <ngl-datatable-column heading="Details" key="field4"></ngl-datatable-column>
         <ngl-datatable-column heading="" key="" cellClass="slds-truncate" sortable>
@@ -68,8 +81,8 @@
       </ngl-form-checkbox-toggle>
       <div class="request-form-footer--controls">
           <button (click)="showCancelRequestModal = true" type="button" nglButton="destructive">Cancel</button>
-          <button type="button" nglButton="neutral">Save</button>
-          <button type="button" nglButton="success">Send</button>
+          <button type="button" nglButton="neutral" (click)="submitRequest('save')">Save</button>
+          <button type="button" nglButton="success" (click)="submitRequest('send')">Send</button>
       </div>
     </div>
   </form>

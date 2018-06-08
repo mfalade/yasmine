@@ -23,14 +23,14 @@ export class StoreService {
   }
 
   deleteRequest(request): void {
-    const requestData = this.studentRequests.filter(x => x.requestId !== request.requestId);
+    const requestData = this.studentRequests.filter(x => x._id !== request._id);
     this.studentRequests$.next(requestData);
     this.studentRequests = requestData;
     this.saveStudentRequests();
   }
 
   updateRequest(data): void {
-    const idx = this.studentRequests.findIndex(x => x.requestId === data.requestId);
+    const idx = this.studentRequests.findIndex(x => x._id === data._id);
     const requestData = Object.assign([...this.studentRequests], { [idx]: data });
 
     this.studentRequests$.next(requestData);
@@ -40,15 +40,21 @@ export class StoreService {
   }
 
   saveStudentRequests(): void {
-    this.clearAll();
+    this.clearStudentsFromLocalStorage();
     localStorage.setItem('studentRequests', JSON.stringify(this.studentRequests));
   }
 
   getItem(itemId): any {
-    return this.studentRequests.find(x => x.requestId === itemId);
+    return this.studentRequests.find(x => x._id === itemId);
   }
 
+  clearStudentsFromLocalStorage() {
+    localStorage.removeItem('studentRequests');
+  }
+  
   clearAll(): void {
     localStorage.removeItem('studentRequests');
+    this.studentRequests$.next([]);
+    this.studentRequests = [];
   }
 }

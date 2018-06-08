@@ -37,7 +37,7 @@ export class DataListComponent implements OnInit {
   }
 
   fetchItems() {
-    this._requestService.get('data').subscribe(
+    this._requestService.get('users').subscribe(
       res => {
         this.dataList = res.data;
         this.loading = false;
@@ -47,11 +47,13 @@ export class DataListComponent implements OnInit {
   }
 
   addNewItem()  {
-    this._router.navigateByUrl('/data/create');
+    this._router.navigateByUrl('/user/create');
   }
 
   editData (data) {
-    const url = `/data/${data._id}/edit`;
+    const url = `/user/${data._id}/edit`;
+    console.log(url, '.....');
+    
     this._router.navigateByUrl(url);
   }
 
@@ -62,7 +64,7 @@ export class DataListComponent implements OnInit {
   }
 
   confirmDelete () {
-    const resource = `data/${this.stagedItem._id}`;
+    const resource = `users/${this.stagedItem._id}`;
     this._requestService.delete(resource).subscribe(
       res => {
         this.showModal = false;

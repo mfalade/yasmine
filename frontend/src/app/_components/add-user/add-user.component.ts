@@ -6,11 +6,11 @@ import { StoreService } from '../../_services/store.service';
 import { generateUniqueId } from '../../_shared/utils';
 
 @Component({
-  selector: 'app-add-data',
-  templateUrl: './add-data.component.html',
-  styleUrls: ['./add-data.component.css']
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.css']
 })
-export class AddDataComponent implements OnInit {
+export class AddUserComponent implements OnInit {
   public currentPage = 1;
   public dataForm: FormGroup;
   public payload: any = {};
@@ -18,6 +18,13 @@ export class AddDataComponent implements OnInit {
   public showSuccessMessage = false;
   public showErrorMessage = false;
   public isRequesting = false;
+  public isSaved = false;
+  public dataList: any[] = [];
+  public requestForm: FormGroup;
+  public showModal: boolean;
+  public stagedItem: any;
+  public loading = true;
+  public deleteItemError: any;
   public showPageOneExtraFields = false;
 
   public type = 'default';
@@ -57,6 +64,17 @@ export class AddDataComponent implements OnInit {
       plainText17: ['default-1'],
       plainText18: ['default-1'],
     });
+    this.initializeRequestForm();
+  }
+
+
+  initializeRequestForm() {
+    this.requestForm = this._formBuilder.group({
+      appId: ['default-1'],
+      name: [''],
+      environment: ['default-1'],
+      remarks: [false],
+    });
   }
 
   handleRequestTypeChange({ target }) {
@@ -71,36 +89,19 @@ export class AddDataComponent implements OnInit {
     }
     this.showPageOneExtraFields = true;
   }
-
+  
   submitForm() {
-    this.isRequesting = true;
-    const studentRequest = {
-      ...this.dataForm.value,
-      requestId: generateUniqueId(),
-      studentId: `student_${generateUniqueId().substring(0, 6)}`,
-    };
-
-    this._storeService.addStudentRequest(studentRequest);
-
-    this.isRequesting = false;
-    this.showSuccessMessage = true;
-    this.resetForm();
-
-    setTimeout(() => {
-      this._router.navigateByUrl('/');
-    }, 2000);
-  }
-
-  saveToDb() {
-    this._requestService.post('data', this.dataForm.value).subscribe(
+    this._requestService.post('users', this.dataForm.value).subscribe(
       res => {
         this.isRequesting = false;
         this.showSuccessMessage = true;
         this.resetForm();
+        this.isSaved = true;
+        this._storeService.addStudentRequest(res.data);
 
         setTimeout(() => {
-          this._router.navigateByUrl('/');
-        }, 2000);
+          this._router.navigateByUrl('/requests/add');
+        }, 1000);
       },
       err => {
         this.isRequesting = false;
@@ -109,6 +110,10 @@ export class AddDataComponent implements OnInit {
         this.showErrorMessage = true;
       }
     );
+  }
+
+  finalValidation() {
+    this._router.navigateByUrl('/');
   }
 
   resetForm() {

@@ -10,28 +10,32 @@ import { RequestService } from './_services/request.service';
 import { StoreService } from './_services/store.service';
 import { AppComponent } from './app.component';
 import { DataListComponent } from './_components/data-list/data-list.component';
-import { EditItemComponent } from './_components/edit-item/edit-item.component';
-import { AddDataComponent } from './_components/add-data/add-data.component';
-import { HomeComponent } from './_components/home/home.component';
+import { EditUserComponent } from './_components/edit-user/edit-user.component';
+import { AddUserComponent } from './_components/add-user/add-user.component';
+import { AddRequestComponent } from './_components/add-request/add-request.component';
+import { EditRequestComponent } from './_components/edit-request/edit-request.component';
 import { RequestsComponent } from './_components/requests/requests.component';
 
 
 export const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'data/create', component: AddDataComponent },
-  { path: 'data/:id/edit', component: EditItemComponent },
+  { path: 'requests/add', component: AddRequestComponent },
+  { path: 'requests/:id/edit', component: EditRequestComponent },
+  { path: 'user/create', component: AddUserComponent },
+  { path: 'user/:id/edit', component: EditUserComponent },
   { path: 'users', component: DataListComponent },
   { path: 'requests', component: RequestsComponent },
-  { path: '*', redirectTo: '/' },
+  { path: '', redirectTo: '/requests', pathMatch: 'full' },
+  { path: '*', redirectTo: '/requests', pathMatch: 'full' },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     DataListComponent,
-    EditItemComponent,
-    AddDataComponent,
-    HomeComponent,
+    EditUserComponent,
+    AddUserComponent,
+    AddRequestComponent,
+    EditRequestComponent,
     RequestsComponent
   ],
   imports: [
