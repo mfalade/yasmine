@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { RequestService } from '../../_services/request.service';
 import { StoreService } from '../../_services/store.service';
+import { generateUniqueId } from '../../_shared/utils';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './add-request.component.html',
+  styleUrls: ['./add-request.component.css']
 })
-export class HomeComponent implements OnInit {
+export class AddRequestComponent implements OnInit {
   public dataList: any[] = [];
   public requestForm: FormGroup;
   public showModal: boolean;
@@ -17,6 +18,9 @@ export class HomeComponent implements OnInit {
   public loading = false;
   public deleteItemError: any;
   public showCancelRequestModal: boolean;
+  public errorMessage: any;
+  public showSuccessMessage = false;
+  public showErrorMessage = false;
 
   constructor(
     private _requestService: RequestService,
@@ -36,16 +40,9 @@ export class HomeComponent implements OnInit {
       name: [''],
       environment: ['default-1'],
       remarks: [false],
-    });
-  }
-
-  fetchItems() {
-    this._requestService.get('data').subscribe(
-      res => {
-        this.dataList = res.data;
-        this.loading = false;
-      }, err => {
-        this.loading = false;
+      status: ['under_construction'],
+      students: [[]],
+      requestId: ['']
     });
   }
 
@@ -54,14 +51,45 @@ export class HomeComponent implements OnInit {
       this.dataList = students;
     });
   }
+  
+  getRequests() {
+    this._storeService.studentRequests$.subscribe(students => {
+      this.dataList = students;
+    });
+  }
 
   addNewItem()  {
-    this._router.navigateByUrl('/data/create');
+    // this.requestForm.controls['requestID']
+    this._router.navigateByUrl('/user/create');
   }
 
   editData (data) {
-    const url = `/data/${data.requestId}/edit`;
+    const url = `/user/${data._id}/edit`;
     this._router.navigateByUrl(url);
+  }
+
+  submitRequest(requestStatus) {
+    const studentsId = this.dataList.map(user => user._id);
+    this.loading = true;
+    this.requestForm.controls['students'].setValue(studentsId);
+    this.requestForm.controls['status'].setValue(requestStatus);
+    this._requestService.post('requests', this.requestForm.value).subscribe(
+      res => {
+        this.loading = false;
+        this.showSuccessMessage = true;
+        this._storeService.clearAll();
+
+        setTimeout(() => {
+          this._router.navigateByUrl('/');
+        }, 2000);
+      },
+      err => {
+        this.loading = false;
+        const errorMessage = err.constructor === Object ? (err.message || 'An error occurred') : err;
+        this.errorMessage = errorMessage;
+        this.showErrorMessage = true;
+      }
+    );
   }
 
   stageItemForDeletion (data) {
@@ -87,11 +115,11 @@ export class HomeComponent implements OnInit {
   }
 
   deleteItemFromDb() {
-    const resource = `data/${this.stagedItem._id}`;
+    const resource = `users/${this.stagedItem._id}`;
     this._requestService.delete(resource).subscribe(
       res => {
         this.deleteItemError = null;
-        this.fetchItems();
+        this.getRequestStudents();
       },
       err => this.deleteItemError = err
     );

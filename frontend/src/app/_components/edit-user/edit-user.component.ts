@@ -6,11 +6,11 @@ import { StoreService } from '../../_services/store.service';
 
 
 @Component({
-  selector: 'app-edit-item',
-  templateUrl: './edit-item.component.html',
-  styleUrls: ['./edit-item.component.css']
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.css']
 })
-export class EditItemComponent implements OnInit {
+export class EditUserComponent implements OnInit {
   public currentPage = 1;
   public dataForm: FormGroup;
   public payload: any = {};
@@ -78,14 +78,16 @@ export class EditItemComponent implements OnInit {
 
   fetchData() {
     this._route.params.subscribe((params: Params) => {
-      const requestId = params['id'];
-      const data = this._storeService.getItem(requestId);
-      if (data) {
-        this.data = data;
-        this.showPageOneExtraFields = data.requestType === 'client-vip';
-        return this.dataForm.patchValue(data);
-      }
-      this._router.navigateByUrl('/');
+      const resource = `users/${params['id']}`;
+      this._requestService.get(resource).subscribe(
+        res => {
+          const data = res.data[0];
+          this.data = data;
+          this.dataForm.patchValue(data);
+        },
+        err => {
+          console.log('error', err);
+        });
     });
   }
 
@@ -104,14 +106,14 @@ export class EditItemComponent implements OnInit {
   updateItemInDb() {
     this.isRequesting = true;
     const data = this.dataForm.value;
-    const url = `data/${this.data._id}`;
+    const url = `users/${this.data._id}`;
     this._requestService.put(url, this.dataForm.value).subscribe(
       res => {
         this.isRequesting = false;
         this.showSuccessMessage = true;
 
         setTimeout(() => {
-          this._router.navigateByUrl('/');
+          this._router.navigateByUrl('/requests/add');
         }, 2000);
       },
       err => {
@@ -131,11 +133,12 @@ export class EditItemComponent implements OnInit {
       studentId: this.data.studentId
     };
     this._storeService.updateRequest(data);
+    this.updateItemInDb();
     this.isRequesting = false;
     this.showSuccessMessage = true;
 
     setTimeout(() => {
-      this._router.navigateByUrl('/');
+      this._router.navigateByUrl('/requests/add');
     }, 2000);
   }
 }
