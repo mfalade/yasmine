@@ -51,3 +51,18 @@
 .slds-menu__item {
   margin-bottom: 20px;
 }
+
+.slds-dropdown {
+  left: 50% !important;
+}
+
+.slds-dropdown-trigger {
+  width: 100%;
+}
+
+.slds-dropdown-trigger:after {
+  content: '>';
+  position: absolute;
+  right: -20px;
+  top: 0;
+}
