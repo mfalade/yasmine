@@ -1,3 +1,7 @@
+.link-item-wrapper:hover {
+  cursor: pointer;
+}
+
 .link-item-wrapper:before {
   content: attr(data-prefix);
   position: absolute;

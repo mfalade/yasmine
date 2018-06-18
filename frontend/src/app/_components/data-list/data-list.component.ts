@@ -52,7 +52,6 @@ export class DataListComponent implements OnInit {
 
   editData (data) {
     const url = `/user/${data._id}/edit`;
-    console.log(url, '.....');
     
     this._router.navigateByUrl(url);
   }
