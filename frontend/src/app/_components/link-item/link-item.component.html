@@ -1,0 +1,21 @@
+<div class="link-item-wrapper" [attr.data-prefix]="prefix">
+
+  <a role="menuitem">
+    <a routerLink="#" routerLinkActive="active">{{ linkTitle }}</a>
+  </a>
+  <div  *ngIf="hasChildren" class="slds-dropdown slds-dropdown_left">
+    <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
+      <li class="slds-dropdown__item" role="presentation">
+        <a href="javascript:void(0);" role="menuitem" tabindex="0">
+          <span class="slds-truncate" title="Menu Item One">Menu Item One</span>
+        </a>
+      </li>
+      <li class="slds-dropdown__item" role="presentation">
+        <a href="javascript:void(0);" role="menuitem" tabindex="1">
+          <span class="slds-truncate" title="Menu Item One">Menu Item Two</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</div>

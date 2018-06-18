@@ -1,0 +1,12 @@
+.link-item-wrapper:before {
+  content: attr(data-prefix);
+  position: absolute;
+  left: -30px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  background: #16325c;
+}

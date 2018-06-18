@@ -15,6 +15,7 @@ import { AddUserComponent } from './_components/add-user/add-user.component';
 import { AddRequestComponent } from './_components/add-request/add-request.component';
 import { EditRequestComponent } from './_components/edit-request/edit-request.component';
 import { RequestsComponent } from './_components/requests/requests.component';
+import { LinkItemComponent } from './_components/link-item/link-item.component';
 
 
 export const appRoutes: Routes = [
@@ -36,7 +37,8 @@ export const appRoutes: Routes = [
     AddUserComponent,
     AddRequestComponent,
     EditRequestComponent,
-    RequestsComponent
+    RequestsComponent,
+    LinkItemComponent
   ],
   imports: [
     RouterModule.forRoot(

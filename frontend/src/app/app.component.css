@@ -53,16 +53,16 @@
 }
 
 .slds-dropdown {
-  left: 50% !important;
+  left: 70% !important;
 }
 
 .slds-dropdown-trigger {
   width: 100%;
 }
 
-.slds-dropdown-trigger:after {
+.link-item-wrapper:before {
   content: '>';
   position: absolute;
-  right: -20px;
+  left: -20px;
   top: 0;
 }
