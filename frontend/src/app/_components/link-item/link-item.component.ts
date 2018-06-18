@@ -8,7 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 export class LinkItemComponent implements OnInit {
   @Input() linkTitle: string;
   @Input() hasChildren: boolean;
-  @Input() prefix: boolean;
+  @Input() prefix: any;
+
+  public isCollapsed = true;
+
+  handleClick() {
+    if (this.hasChildren) {
+      this.isCollapsed = !this.isCollapsed;
+    }
+  }
 
   constructor() { }
 

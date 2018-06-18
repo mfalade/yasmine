@@ -9,4 +9,24 @@
   color: white;
   text-align: center;
   background: #16325c;
+  transition: all .2s ease-in-out;
+}
+
+.link-item-wrapper.expanded:before {
+  transform: rotate(90deg);
+}
+
+.drop-down--items {
+  color: #16325c;
+  height: 0;
+  overflow: hidden;
+  transition: height .3s ease-in-out;
+}
+
+.drop-down--items li {
+  padding-bottom: 10px;
+}
+
+.drop-down--items.expanded {
+  height: 50px;
 }
