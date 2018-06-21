@@ -44,25 +44,12 @@
   margin-top: 10px;
 }
 
-.slds-tabs--default__nav {
-  display: none!important;
-}
-
 .slds-menu__item {
+  width: 100%;
   margin-bottom: 20px;
 }
 
-.slds-dropdown {
-  left: 70% !important;
-}
-
-.slds-dropdown-trigger {
-  width: 100%;
-}
-
-.link-item-wrapper:before {
-  content: '>';
-  position: absolute;
-  left: -20px;
-  top: 0;
+.slds-menu__item.active {
+  text-decoration: underline;
+  color: #0070d2;
 }

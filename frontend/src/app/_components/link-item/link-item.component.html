@@ -4,12 +4,9 @@
   [attr.data-prefix]="prefix"
   (click)="handleClick()"
 >
-  <p *ngIf="hasChildren">{{ linkTitle }}</p>
+  <p>{{ linkTitle }}</p>
 
-  <a role="menuitem" *ngIf="!hasChildren">
-    <a routerLink="#" routerLinkActive="active">{{ linkTitle }}</a>
-  </a>
-  <div *ngIf="hasChildren" class="drop-down--items" [ngClass]="isCollapsed ? 'collapsed' : 'expanded'">
+  <div class="drop-down--items" [ngClass]="isCollapsed ? 'collapsed' : 'expanded'">
     <ul role="menu" aria-label="Show More">
       <li role="presentation">
         <a href="javascript:void(0);" role="menuitem" tabindex="0">

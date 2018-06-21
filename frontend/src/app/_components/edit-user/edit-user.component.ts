@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../../_services/request.service';
 import { StoreService } from '../../_services/store.service';
+import { NavService } from '../../_services/nav.service';
 
 
 @Component({
@@ -30,10 +31,17 @@ export class EditUserComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _requestService: RequestService,
-    private _storeService: StoreService
+    private _storeService: StoreService,
+    private _nav: NavService,
   ) { }
 
   ngOnInit() {
+    this.initializeDataForm();
+    this.fetchData();
+    this._nav.currentView$.subscribe(currentView => this.selectedTab = currentView);
+  }
+
+  initializeDataForm() {
     this.dataForm = this._formBuilder.group({
       requestType: ['first-user'],
       clientType: ['vip'],
@@ -59,7 +67,6 @@ export class EditUserComponent implements OnInit {
       plainText17: [''],
       plainText18: [''],
     });
-    this.fetchData();
   }
 
   handleRequestTypeChange({ target }) {
@@ -138,5 +145,9 @@ export class EditUserComponent implements OnInit {
     setTimeout(() => {
       this._router.navigateByUrl('/requests/add');
     }, 2000);
+  }
+
+  onTabSelected(selectedView) {
+    this._nav.setCurrentView(selectedView);
   }
 }

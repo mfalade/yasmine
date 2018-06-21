@@ -1,26 +1,34 @@
-import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { NavService } from './_services/nav.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  public currentRoute;
-  public profileAsideNav = false;
+export class AppComponent implements OnInit {
+  public showQuickLinks = false;
+  public currentView: string;
+
 
   constructor(
-    private location: Location,
-    private router: Router
+    private _nav: NavService,
+    private _router: Router,
+    private _location: Location
   ) {
-    router.events
-    .subscribe(
-      (val) => {
-        this.currentRoute = location.path();
-        this.profileAsideNav = this.currentRoute === '/requests' || this.currentRoute === '/requests/add';
-      }
-    );
+    _router.events.subscribe(ev => {
+      const currRoute = _location.path();
+      this.showQuickLinks = currRoute.startsWith('/user');
+    });
+  }
+
+  ngOnInit() {
+    this._nav.currentView$.subscribe(view => this.currentView = view);
+  }
+
+  onNavItemClick(view: string) {
+    this._nav.setCurrentView(view);
   }
 }

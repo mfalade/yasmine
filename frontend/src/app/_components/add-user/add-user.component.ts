@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { RequestService } from '../../_services/request.service';
 import { StoreService } from '../../_services/store.service';
-import { generateUniqueId } from '../../_shared/utils';
+import { NavService } from '../../_services/nav.service';
 
 @Component({
   selector: 'app-add-user',
@@ -11,7 +11,7 @@ import { generateUniqueId } from '../../_shared/utils';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-  public currentPage = 1;
+  public currentView = '';
   public dataForm: FormGroup;
   public payload: any = {};
   public errorMessage: any;
@@ -29,16 +29,23 @@ export class AddUserComponent implements OnInit {
 
   public type = 'default';
   public id = 0;
-  public selectedTab: 'firstPage';
+  public selectedTab: 'Identity';
 
   constructor(
     private _router: Router,
     private _formBuilder: FormBuilder,
     private _storeService: StoreService,
-    private _requestService: RequestService
+    private _requestService: RequestService,
+    private _nav: NavService,
   ) { }
 
   ngOnInit() {
+    this.initializeDataForm();
+    this.initializeRequestForm();
+    this._nav.currentView$.subscribe(currentView => this.selectedTab = currentView);
+  }
+
+  initializeDataForm() {
     this.dataForm = this._formBuilder.group({
       requestType: ['first-user'],
       clientType: ['vip'],
@@ -64,9 +71,7 @@ export class AddUserComponent implements OnInit {
       plainText17: ['default-1'],
       plainText18: ['default-1'],
     });
-    this.initializeRequestForm();
   }
-
 
   initializeRequestForm() {
     this.requestForm = this._formBuilder.group({
@@ -89,7 +94,7 @@ export class AddUserComponent implements OnInit {
     }
     this.showPageOneExtraFields = true;
   }
-  
+
   submitForm() {
     this._requestService.post('users', this.dataForm.value).subscribe(
       res => {
@@ -129,6 +134,10 @@ export class AddUserComponent implements OnInit {
         field8: 'default-1',
       });
     }, 1500);
+  }
+
+  onTabSelected(selectedView) {
+    this._nav.setCurrentView(selectedView);
   }
 }
 

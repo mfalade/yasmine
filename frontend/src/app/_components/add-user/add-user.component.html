@@ -13,9 +13,9 @@
 
 <form [formGroup]="dataForm">
   <ngl-tabs [(selected)]="selectedTab" [type]="type">
-    <ng-template ngl-tab nglTabId="firstPage" #firstPage="nglTab">
+    <ng-template ngl-tab nglTabId="Identity" #Identity="nglTab">
       <div>
-        <h3>Add New Student</h3>
+        <h4>Add New Student > Identity</h4>
         <p>Please fill up the required fields:</p>
         <hr />
         <div class="form-container">
@@ -67,13 +67,14 @@
       <div class="controls">
         <div class="space-between">
           <span></span>
-          <button type="button" nglButton="neutral" (click)="selectedTab = secondPage">Next</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = PersonalContact; onTabSelected('PersonalContact')">Next</button>
         </div>
       </div>
     </ng-template>
 
-    <ng-template ngl-tab nglTabId="secondPage" #secondPage="nglTab">
+    <ng-template ngl-tab nglTabId="PersonalContact" #PersonalContact="nglTab">
       <div>
+        <h4>Add New Student > Personal Contact</h4>
         <p>Please fill up the required fields:</p>
         <hr />
         <div class="double-col-container">
@@ -100,13 +101,16 @@
       </div>
       <div class="controls">
         <div class="space-between">
-          <button type="button" nglButton="neutral" (click)="selectedTab = firstPage">Back</button>
-          <button type="button" nglButton="neutral" (click)="selectedTab = thirdPage">Next</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = Identity; onTabSelected('Identity')">Back</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = Authentication; onTabSelected('Authentication')">Next</button>
         </div>
       </div>
     </ng-template>
 
-    <ng-template ngl-tab nglTabId="thirdPage" #thirdPage="nglTab">
+    <ng-template ngl-tab nglTabId="Authentication" #Authentication="nglTab">
+        <h4>Add New Student > Authentication</h4>
+        <p>Please fill up the required fields:</p>
+        <hr />
       <div class="double-col-container">
         <div class="form-container col-6">
           <ngl-form-element label="Plain text" class="slds-m-top--small">
@@ -171,13 +175,16 @@
       </div>
       <div class="controls">
         <div class="space-between">
-          <button type="button" nglButton="neutral" (click)="selectedTab = secondPage">Back</button>
-          <button type="button" nglButton="neutral" (click)="selectedTab = fourthPage">Next</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = PersonalContact; onTabSelected('PersonalContact')">Back</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = EducationalBackground; onTabSelected('EducationalBackground')">Next</button>
         </div>
       </div>
     </ng-template>
 
-    <ng-template ngl-tab nglTabId="fourthPage" #fourthPage="nglTab">
+    <ng-template ngl-tab nglTabId="EducationalBackground" #EducationalBackground="nglTab">
+        <h4>Add New Student > Educational Background</h4>
+        <p>Please fill up the required fields:</p>
+        <hr />
       <div class="double-col-container">
         <div class="form-container col-6">
           <ngl-form-element label="Plain text" class="slds-m-top--small">
@@ -262,13 +269,156 @@
       </div>
       <div class="controls">
         <div class="space-between">
-          <button type="button" nglButton="neutral" (click)="selectedTab = thirdPage">Back</button>
-          <button type="button" nglButton="neutral" (click)="selectedTab = fifthPage">Next</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = Authentication; onTabSelected('Authentication')">Back</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = ProfessionalExperience; onTabSelected('ProfessionalExperience')">Next</button>
         </div>
       </div>
     </ng-template>
 
-    <ng-template ngl-tab nglTabId="fifthPage" #fifthPage="nglTab">
+    <ng-template ngl-tab nglTabId="ProfessionalExperience" #ProfessionalExperience="nglTab">
+        <div>
+          <h4>Add New Student > Professional Experience</h4>
+          <p>Please fill up the required fields:</p>
+          <hr />
+          <div class="double-col-container">
+            <div class="form-container col-6">
+              <ngl-form-element label="Status" class="slds-m-top--small">
+                <select nglFormControl class="slds-select" formControlName="status" [required]="false">
+                  <option value="Sir">Sir</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                </select>
+              </ngl-form-element>
+
+            </div>
+
+            <div class="form-container col-6">
+              Plain text
+
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
+          <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+        </div>
+        <div class="controls">
+          <div class="space-between">
+            <button type="button" nglButton="neutral" (click)="selectedTab = EducationalBackground; onTabSelected('EducationalBackground')">Back</button>
+            <button type="button" nglButton="neutral" (click)="selectedTab = Interest; onTabSelected('Interest')">Next</button>
+          </div>
+        </div>
+      </ng-template>
+
+    <ng-template ngl-tab nglTabId="Interest" #Interest="nglTab">
+        <div>
+          <h4>Add New Student > Interest</h4>
+          <p>Please fill up the required fields:</p>
+          <hr />
+          <div class="double-col-container">
+            <div class="form-container col-6">
+              <ngl-form-element label="Status" class="slds-m-top--small">
+                <select nglFormControl class="slds-select" formControlName="status" [required]="false">
+                  <option value="Sir">Sir</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                </select>
+              </ngl-form-element>
+
+            </div>
+
+            <div class="form-container col-6">
+              Plain text
+
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
+          <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+        </div>
+        <div class="controls">
+          <div class="space-between">
+            <button type="button" nglButton="neutral" (click)="selectedTab = ProfessionalExperience; onTabSelected('ProfessionalExperience')">Back</button>
+            <button type="button" nglButton="neutral" (click)="selectedTab = SelectedMaster; onTabSelected('SelectedMaster')">Next</button>
+          </div>
+        </div>
+      </ng-template>
+
+    <ng-template ngl-tab nglTabId="SelectedMaster" #SelectedMaster="nglTab">
+        <div>
+          <h4>Add New Student > Selected Master</h4>
+          <p>Please fill up the required fields:</p>
+          <hr />
+          <div class="double-col-container">
+            <div class="form-container col-6">
+              <ngl-form-element label="Status" class="slds-m-top--small">
+                <select nglFormControl class="slds-select" formControlName="status" [required]="false">
+                  <option value="Sir">Sir</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                </select>
+              </ngl-form-element>
+
+            </div>
+
+            <div class="form-container col-6">
+              Plain text
+
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
+          <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+        </div>
+        <div class="controls">
+          <div class="space-between">
+            <button type="button" nglButton="neutral" (click)="selectedTab = Interest; onTabSelected('Interest')">Back</button>
+            <button type="button" nglButton="neutral" (click)="selectedTab = ExamResults; onTabSelected('ExamResults')">Next</button>
+          </div>
+        </div>
+      </ng-template>
+
+    <ng-template ngl-tab nglTabId="ExamResults" #ExamResults="nglTab">
+        <div>
+          <h4>Add New Student > Exam Results</h4>
+          <p>Please fill up the required fields:</p>
+          <hr />
+          <div class="double-col-container">
+            <div class="form-container col-6">
+              <ngl-form-element label="Status" class="slds-m-top--small">
+                <select nglFormControl class="slds-select" formControlName="status" [required]="false">
+                  <option value="Sir">Sir</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                </select>
+              </ngl-form-element>
+
+            </div>
+
+            <div class="form-container col-6">
+              Plain text
+
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="isRequesting" style="position:relative; height:6.25rem; z-index:0;">
+          <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
+        </div>
+        <div class="controls">
+          <div class="space-between">
+            <button type="button" nglButton="neutral" (click)="selectedTab = SelectedMaster; onTabSelected('SelectedMaster')">Back</button>
+            <button type="button" nglButton="neutral" (click)="selectedTab = Recommendations; onTabSelected('Recommendations')">Next</button>
+          </div>
+        </div>
+      </ng-template>
+
+    <ng-template ngl-tab nglTabId="Recommendations" #Recommendations="nglTab">
+      <h4>Add New Student > Recommendations</h4>
+      <p>Please fill up the required fields:</p>
+      <hr />
       <div class="double-col-container">
         <div class="form-container col-6">
           <ngl-form-element label="Plain text" class="slds-m-top--small">
@@ -353,7 +503,7 @@
       </div>
       <div class="controls">
         <div class="space-between">
-          <button type="button" nglButton="neutral" (click)="selectedTab = fourthPage">Back</button>
+          <button type="button" nglButton="neutral" (click)="selectedTab = ExamResults; onTabSelected('ExamResults')">Back</button>
           <button type="button" [disabled]="isRequesting" nglButton="neutral" (click)="submitForm()">Save</button>
         </div>
       </div>

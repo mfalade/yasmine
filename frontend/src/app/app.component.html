@@ -20,81 +20,103 @@
 
         <hr>
 
-        <ul class="dropdown__list" role="menu">
-          <li class="slds-menu__item slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+        <ul class="dropdown__list" role="menu" *ngIf="showQuickLinks">
+          <li
+            class="slds-menu__item slds-dropdown-trigger"
+            [ngClass]="{ 'active':  currentView === 'Identity' }"
+          >
               <app-link-item
                 [linkTitle]="'Identity'"
                 [prefix]="'1'"
+                (navItemClick)="onNavItemClick($event)"
               ></app-link-item>
           </li>
 
-          <li class="slds-menu__item slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+          <li
+            class="slds-menu__item slds-dropdown-trigger"
+            [ngClass]="{ 'active':  currentView === 'PersonalContact' }"
+          >
               <app-link-item
                 [linkTitle]="'Personal Contact'"
                 [prefix]="'2'"
+                (navItemClick)="onNavItemClick($event)"
               ></app-link-item>
           </li>
 
-          <li class="slds-menu__item slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+          <li
+            class="slds-menu__item slds-dropdown-trigger"
+            [ngClass]="{ 'active':  currentView === 'Authentication' }"
+          >
               <app-link-item
                 [linkTitle]="'Authentication'"
                 [prefix]="'3'"
+                (navItemClick)="onNavItemClick($event)"
               ></app-link-item>
             </li>
 
-          <li class="slds-menu__item slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+          <li
+            class="slds-menu__item slds-dropdown-trigger"
+            [ngClass]="{ 'active':  currentView === 'EducationalBackground' }"
+          >
             <app-link-item
               [linkTitle]="'Educational Background'"
-              [hasChildren]="true"
               [prefix]="'>'"
+              (navItemClick)="onNavItemClick($event)"
             ></app-link-item>
           </li>
 
-          <li class="slds-menu__item slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+          <li
+            class="slds-menu__item slds-dropdown-trigger"
+            [ngClass]="{ 'active':  currentView === 'ProfessionalExperience' }"
+          >
             <app-link-item
               [linkTitle]="'Professional Experience'"
-              [hasChildren]="true"
               [prefix]="'>'"
+              (navItemClick)="onNavItemClick($event)"
             ></app-link-item>
           </li>
 
-          <li class="slds-menu__item slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+          <li
+            class="slds-menu__item slds-dropdown-trigger"
+            [ngClass]="{ 'active':  currentView === 'Interest' }"
+          >
             <app-link-item
               [linkTitle]="'Interest'"
-              [hasChildren]="true"
               [prefix]="'>'"
+              (navItemClick)="onNavItemClick($event)"
             ></app-link-item>
           </li>
 
-          <li class="slds-menu__item slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+          <li
+            class="slds-menu__item slds-dropdown-trigger"
+            [ngClass]="{ 'active':  currentView === 'SelectedMaster' }"
+          >
             <app-link-item
               [linkTitle]="'Selected Master'"
-              [hasChildren]="true"
               [prefix]="'>'"
+              (navItemClick)="onNavItemClick($event)"
             ></app-link-item>
           </li>
 
-          <li class="slds-menu__item slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+          <li
+            class="slds-menu__item slds-dropdown-trigger"
+            [ngClass]="{ 'active':  currentView === 'ExamResults' }"
+          >
             <app-link-item
               [linkTitle]="'Exam Results'"
-              [hasChildren]="true"
               [prefix]="'>'"
+              (navItemClick)="onNavItemClick($event)"
             ></app-link-item>
           </li>
 
-          <li class="slds-menu__item slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+          <li
+            class="slds-menu__item slds-dropdown-trigger"
+            [ngClass]="{ 'active':  currentView === 'Recommendations' }"
+          >
             <app-link-item
               [linkTitle]="'Recommendations'"
-              [hasChildren]="true"
               [prefix]="'>'"
-            ></app-link-item>
-          </li>
-
-          <li class="slds-menu__item slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
-            <app-link-item
-              [linkTitle]="'Professional Experience'"
-              [hasChildren]="true"
-              [prefix]="'>'"
+              (navItemClick)="onNavItemClick($event)"
             ></app-link-item>
           </li>
         </ul>

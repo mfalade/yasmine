@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RequestService } from './_services/request.service';
 import { StoreService } from './_services/store.service';
+import { NavService } from './_services/nav.service';
 import { AppComponent } from './app.component';
 import { DataListComponent } from './_components/data-list/data-list.component';
 import { EditUserComponent } from './_components/edit-user/edit-user.component';
@@ -52,7 +53,7 @@ export const appRoutes: Routes = [
     ReactiveFormsModule,
     NglModule.forRoot()
   ],
-  providers: [HttpModule, RequestService, StoreService],
+  providers: [HttpModule, RequestService, StoreService, NavService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
