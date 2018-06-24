@@ -75,6 +75,7 @@ export class UserDetailsFormComponent implements OnInit, OnChanges {
 
   handleRequestTypeChange({ target }) {
     this.showPageOneExtraFields = target.value === 'new-user';
+    this._nav.setUserType(target.value);
   }
 
   onTabSelected(selectedView) {
