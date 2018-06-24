@@ -26,14 +26,14 @@ export class UserDetailsFormComponent implements OnInit, OnChanges {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _nav: NavService,
+    private _sideNavService: NavService,
     private _requestService: RequestService,
   ) {
     this.initializeDataForm();
   }
 
   ngOnInit() {
-    this._nav.currentView$.subscribe(currentView => this.selectedTab = currentView);
+    this._sideNavService.currentView$.subscribe(currentView => this.selectedTab = currentView);
   }
 
   ngOnChanges() {
@@ -75,11 +75,11 @@ export class UserDetailsFormComponent implements OnInit, OnChanges {
 
   handleRequestTypeChange({ target }) {
     this.showPageOneExtraFields = target.value === 'new-user';
-    this._nav.setUserType(target.value);
+    this._sideNavService.setUserType(target.value);
   }
 
   onTabSelected(selectedView) {
-    this._nav.setCurrentView(selectedView);
+    this._sideNavService.setCurrentView(selectedView);
   }
 
   submitForm() {
@@ -94,6 +94,7 @@ export class UserDetailsFormComponent implements OnInit, OnChanges {
         this.showSuccessMessage = true;
         this.resetForm();
         this.userCreated.emit(res.data);
+        this._sideNavService.resetState();
       },
       err => {
         this.isRequesting = false;
@@ -112,6 +113,7 @@ export class UserDetailsFormComponent implements OnInit, OnChanges {
         this.showSuccessMessage = true;
 
         this.userUpdated.emit(res.data);
+        this._sideNavService.resetState();
       },
       err => {
         this.isRequesting = false;

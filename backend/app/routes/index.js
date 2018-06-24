@@ -3,8 +3,9 @@ import monk from 'monk';
 
 import UserModel from '../models/user';
 import RequestModel from '../models/request';
+import config from '../config';
 
-const db = monk('mongodb://yasmine:yazz@ds159129.mlab.com:59129/yazz');
+const db = monk(config.MONGO_DB_URI, { collectionOptions: { castIds: false } });
 const AppRouter = Router();
 
 AppRouter.use('/users', UserModel(db));

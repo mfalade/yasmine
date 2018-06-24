@@ -23,4 +23,12 @@ export class NavService {
     this.userType$.next(userType);
     this.userType = userType;
   }
+
+  resetState() {
+    this.userType$.next('first-user');
+    this.userType = 'first-user';
+
+    this.currentView$.next('Identity');
+    this.currentView = 'Identity';
+  }
 }

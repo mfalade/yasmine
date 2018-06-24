@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
 
   constructor(
-    private _nav: NavService,
+    private _sideNavService: NavService,
     private _router: Router,
     private _location: Location
   ) {
@@ -27,20 +27,19 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._nav.currentView$.subscribe(view => this.currentView = view);
-    this._nav.userType$.subscribe(userType => {
+    this._sideNavService.currentView$.subscribe(view => this.currentView = view);
+    this._sideNavService.userType$.subscribe(userType => {
       this.userType = userType;
       this.showQuickLinks = this.shouldShowQuickLinks();
     });
   }
 
   onNavItemClick(view: string) {
-    this._nav.setCurrentView(view);
+    this._sideNavService.setCurrentView(view);
   }
 
   shouldShowQuickLinks() {
     const x = this.currRoute.startsWith('/user') && this.userType === 'new-user';
-    console.log(x, 'shwy ')
     return this.currRoute.startsWith('/user') && this.userType === 'new-user';
   }
 }
