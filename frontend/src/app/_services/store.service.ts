@@ -15,7 +15,7 @@ export class StoreService {
     this.studentRequests = requests;
   }
 
-  addStudentRequest(value): void {
+  cacheStudentData(value): void {
     const requestData = [...this.studentRequests, value];
     this.studentRequests$.next(requestData);
     this.studentRequests = requestData;
@@ -23,7 +23,7 @@ export class StoreService {
   }
 
   deleteRequest(request): void {
-    const requestData = this.studentRequests.filter(x => x._id !== request._id);
+    const requestData = this.studentRequests.filter(x => x._id !== request.studentId);
     this.studentRequests$.next(requestData);
     this.studentRequests = requestData;
     this.saveStudentRequests();

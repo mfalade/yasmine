@@ -36,7 +36,6 @@ export class EditUserComponent implements OnInit {
         res => {
           this.isFetchingUserData = false;
           this.userData = res.data[0];
-          console.log(this.userData, 'user data')
         },
         err => {
           this.isFetchingUserData = false;

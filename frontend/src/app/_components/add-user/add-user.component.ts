@@ -14,7 +14,7 @@ export class AddUserComponent {
   ) { }
 
   onUserCreated(userData) {
-    this._storeService.addStudentRequest(userData);
+    this._storeService.cacheStudentData(userData);
 
     setTimeout(() => {
       this._router.navigateByUrl('/requests/add');

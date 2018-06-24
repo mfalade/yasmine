@@ -55,7 +55,13 @@ export class EditRequestComponent implements OnInit {
           const data = res.data[0];
           this.data = data;
           this.requestForm.patchValue(data);
-          this.dataList = data.students;
+          const lenStudents = data.students.length;
+          this.dataList = data.students.map((student, index) => {
+            return {
+              studentId: student,
+              displayId: this.formatStudentId(lenStudents - index)
+            };
+          });
         },
         err => {
           console.log('error', err);
@@ -63,12 +69,18 @@ export class EditRequestComponent implements OnInit {
     });
   }
 
+  formatStudentId(id) {
+    const lengthID = (id + '').length;
+    const numPaddings = 3 - lengthID;
+    return `Student #${'0'.repeat(numPaddings)}${id}`;
+  }
+
   addNewItem()  {
     this._router.navigateByUrl('/user/create');
   }
 
   editData (data) {
-    const url = `/user/${data._id}/edit`;
+    const url = `/user/${data.studentId}/edit`;
     this._router.navigateByUrl(url);
   }
 
@@ -120,6 +132,9 @@ export class EditRequestComponent implements OnInit {
 
   confirmDelete () {
     this._storeService.deleteRequest(this.stagedItem);
+    this.dataList = this.dataList.filter(student => {
+      return student.studentId !== this.stagedItem.studentId;
+    });
     this.showModal = false;
   }
 
