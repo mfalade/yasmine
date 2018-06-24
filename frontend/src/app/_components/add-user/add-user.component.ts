@@ -18,7 +18,6 @@ export class AddUserComponent implements OnInit {
   public showSuccessMessage = false;
   public showErrorMessage = false;
   public isRequesting = false;
-  public isSaved = false;
   public dataList: any[] = [];
   public requestForm: FormGroup;
   public showModal: boolean;
@@ -40,9 +39,7 @@ export class AddUserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.initializeDataForm();
     this.initializeRequestForm();
-    this._nav.currentView$.subscribe(currentView => this.selectedTab = currentView);
   }
 
   initializeDataForm() {
@@ -82,62 +79,16 @@ export class AddUserComponent implements OnInit {
     });
   }
 
-  handleRequestTypeChange({ target }) {
-    if (target.value !== 'client-vip') {
-      this.dataForm.patchValue({
-        client: false,
-        vip: false,
-        isUniversityStaff: true,
-      });
-      this.showPageOneExtraFields = false;
-      return;
-    }
-    this.showPageOneExtraFields = true;
-  }
+  onUserCreated(userData) {
+    this._storeService.addStudentRequest(userData);
 
-  submitForm() {
-    this._requestService.post('users', this.dataForm.value).subscribe(
-      res => {
-        this.isRequesting = false;
-        this.showSuccessMessage = true;
-        this.resetForm();
-        this.isSaved = true;
-        this._storeService.addStudentRequest(res.data);
-
-        setTimeout(() => {
-          this._router.navigateByUrl('/requests/add');
-        }, 1000);
-      },
-      err => {
-        this.isRequesting = false;
-        const errorMessage = err.constructor === Object ? (err.message || 'An error occurred') : err;
-        this.errorMessage = errorMessage;
-        this.showErrorMessage = true;
-      }
-    );
+    setTimeout(() => {
+      this._router.navigateByUrl('/requests/add');
+    }, 1000);
   }
 
   finalValidation() {
     this._router.navigateByUrl('/');
-  }
-
-  resetForm() {
-    setTimeout(() => {
-      this.dataForm.reset({
-        field1: 'default-1',
-        field2: '',
-        field3: 'default-1',
-        field4: 'default-1',
-        client: false,
-        newMember: false,
-        field7: '',
-        field8: 'default-1',
-      });
-    }, 1500);
-  }
-
-  onTabSelected(selectedView) {
-    this._nav.setCurrentView(selectedView);
   }
 }
 

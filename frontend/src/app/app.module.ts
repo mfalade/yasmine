@@ -17,6 +17,7 @@ import { AddRequestComponent } from './_components/add-request/add-request.compo
 import { EditRequestComponent } from './_components/edit-request/edit-request.component';
 import { RequestsComponent } from './_components/requests/requests.component';
 import { LinkItemComponent } from './_components/link-item/link-item.component';
+import { UserDetailsFormComponent } from './_components/user-details-form/user-details-form.component';
 
 
 export const appRoutes: Routes = [
@@ -39,7 +40,8 @@ export const appRoutes: Routes = [
     AddRequestComponent,
     EditRequestComponent,
     RequestsComponent,
-    LinkItemComponent
+    LinkItemComponent,
+    UserDetailsFormComponent
   ],
   imports: [
     RouterModule.forRoot(
