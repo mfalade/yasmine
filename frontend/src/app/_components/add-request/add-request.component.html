@@ -26,7 +26,7 @@
         </ngl-form-element>
 
         <ngl-form-element label="Name" class="slds-m-top--small">
-          <input nglFormControl type="name" formControlName="name" placeholder="Fill up.." [required]="false">
+          <input nglFormControl type="name" formControlName="name" placeholder="Fill up.." [required]="true">
         </ngl-form-element>
 
         <ngl-form-element label="Environment" class="slds-m-top--small">
@@ -88,8 +88,8 @@
 
       <div class="request-form-footer--controls">
           <button (click)="showCancelRequestModal = true" type="button" nglButton="destructive">Cancel</button>
-          <button type="button" nglButton="neutral" (click)="submitRequest('saved')">Save</button>
-          <button type="button" nglButton="success" (click)="submitRequest('sent')">Send</button>
+          <button [disabled]="!requestForm.valid" type="button" nglButton="neutral" (click)="submitRequest('saved')">Save</button>
+          <button [disabled]="!requestForm.valid" type="button" nglButton="success" (click)="submitRequest('sent')">Send</button>
       </div>
     </div>
   </form>

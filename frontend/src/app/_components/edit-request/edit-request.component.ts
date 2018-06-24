@@ -101,6 +101,7 @@ export class EditRequestComponent implements OnInit {
       res => {
         this.loading = false;
         this.showSuccessMessage = true;
+        this._storeService.clearCache();
 
         setTimeout(() => {
           this._router.navigateByUrl('/');

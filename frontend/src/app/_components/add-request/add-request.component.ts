@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RequestService } from '../../_services/request.service';
 import { StoreService } from '../../_services/store.service';
 
@@ -32,13 +32,12 @@ export class AddRequestComponent implements OnInit {
   ngOnInit() {
     this.initializeRequestForm();
     this.getRequestStudents();
-    this._storeService.clearCache();
   }
 
   initializeRequestForm() {
     this.requestForm = this._formBuilder.group({
       appId: ['default-1'],
-      name: [''],
+      name: ['', [Validators.required]],
       environment: ['default-1'],
       remarks: [''],
       status: ['under_construction'],
@@ -53,7 +52,7 @@ export class AddRequestComponent implements OnInit {
   getRequestStudents() {
     this._storeService.studentRequests$.subscribe(students => {
       const lenStudents = students.length;
-      this.dataList = students.map((student, index) => ({
+      this.dataList = students.reverse().map((student, index) => ({
         ...student,
         displayId: this.formatStudentId(lenStudents - index)
       }));
