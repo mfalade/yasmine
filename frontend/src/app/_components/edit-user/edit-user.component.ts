@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../../_services/request.service';
 
@@ -10,14 +9,10 @@ import { RequestService } from '../../_services/request.service';
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
-  public payload: any = {};
   public errorMessage: any;
   public showErrorMessage = false;
   public isFetchingUserData: boolean;
 
-  public type = 'default';
-  public id = 0;
-  public selectedTab: 'firstPage';
   public userData: any;
 
   constructor(

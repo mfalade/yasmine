@@ -1,10 +1,14 @@
+<div class="slds-notify_container">
+  <ngl-notification *ngIf="showErrorMessage" type="alert" (nglNotificationClose)="showErrorMessage = false" severity="error"
+    timeout="5000" class="slds-theme--alert-texture">
+    <h2>Failed to fetch user item! Reason: {{errorMessage}}</h2>
+  </ngl-notification>
+</div>
+
 <div *ngIf="isFetchingUserData" style="position:relative; height:6.25rem; z-index:0;">
   <ngl-spinner [size]="'small'" [type]="'brand'"></ngl-spinner>
 </div>
 
 <div *ngIf="!isFetchingUserData && userData">
-  <app-user-details-form
-    [userData]="userData"
-    (userUpdated)="onUserDataUpdated($event)"
-  ></app-user-details-form>
+  <app-user-details-form [userData]="userData" (userUpdated)="onUserDataUpdated($event)"></app-user-details-form>
 </div>

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { RequestService } from '../../_services/request.service';
 import { StoreService } from '../../_services/store.service';
-import { generateUniqueId } from '../../_shared/utils';
 
 @Component({
   selector: 'app-home',
