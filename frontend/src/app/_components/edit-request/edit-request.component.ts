@@ -22,6 +22,7 @@ export class EditRequestComponent implements OnInit {
   public data: any;
   public showSuccessMessage = false;
   public showErrorMessage = false;
+  public showRemarksInput = false;
 
   constructor(
     private _requestService: RequestService,
@@ -41,7 +42,7 @@ export class EditRequestComponent implements OnInit {
       appId: ['default-1'],
       name: [''],
       environment: ['default-1'],
-      remarks: [false],
+      remarks: [''],
       status: ['under_construction'],
       students: [[]],
     });
@@ -55,6 +56,7 @@ export class EditRequestComponent implements OnInit {
           const data = res.data[0];
           this.data = data;
           this.requestForm.patchValue(data);
+          this.showRemarksInput = Boolean(data.remarks);
           const lenStudents = data.students.length;
           this.dataList = data.students.map((student, index) => {
             return {
@@ -146,5 +148,9 @@ export class EditRequestComponent implements OnInit {
       },
       err => this.deleteItemError = err
     );
+  }
+
+  setRemarkVisibility(ev) {
+    this.showRemarksInput = ev.target.checked;
   }
 }

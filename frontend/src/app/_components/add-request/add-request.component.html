@@ -75,10 +75,17 @@
       </table>
     </div>
 
+    <div  class="remarks" [ngClass]="showRemarksInput ? 'expanded' : 'collapsed'">
+      <ngl-form-element label="Remarks" class="slds-m-top--small" *ngIf="showRemarksInput">
+        <textarea nglFormControl formControlName="remarks" placeholder="Add remark.." [required]="false"></textarea>
+      </ngl-form-element>
+    </div>
+
     <div class="request-form-footer">
-      <ngl-form-checkbox-toggle label="Remarks" class="slds-m-top--small">
-        <input nglFormControl type="checkbox" formControlName="remarks" />
+      <ngl-form-checkbox-toggle class="slds-m-top--small">
+        <input nglFormControl type="checkbox" (change)="setRemarkVisibility($event)" />
       </ngl-form-checkbox-toggle>
+
       <div class="request-form-footer--controls">
           <button (click)="showCancelRequestModal = true" type="button" nglButton="destructive">Cancel</button>
           <button type="button" nglButton="neutral" (click)="submitRequest('saved')">Save</button>

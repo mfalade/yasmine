@@ -20,6 +20,7 @@ export class AddRequestComponent implements OnInit {
   public errorMessage: any;
   public showSuccessMessage = false;
   public showErrorMessage = false;
+  public showRemarksInput = false;
 
   constructor(
     private _requestService: RequestService,
@@ -31,6 +32,7 @@ export class AddRequestComponent implements OnInit {
   ngOnInit() {
     this.initializeRequestForm();
     this.getRequestStudents();
+    this._storeService.clearCache();
   }
 
   initializeRequestForm() {
@@ -38,10 +40,14 @@ export class AddRequestComponent implements OnInit {
       appId: ['default-1'],
       name: [''],
       environment: ['default-1'],
-      remarks: [false],
+      remarks: [''],
       status: ['under_construction'],
       students: [[]],
     });
+  }
+
+  setRemarkVisibility(ev) {
+    this.showRemarksInput = ev.target.checked;
   }
 
   getRequestStudents() {

@@ -1,0 +1,13 @@
+.remarks {
+  margin-top: 40px;
+  transition: height .3s ease-in-out;
+}
+
+.remarks.collapsed  {
+  height: 0;
+  overflow: hidden;
+}
+
+.remarks.expanded  {
+  height: 5em;
+}
