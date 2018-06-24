@@ -23,10 +23,20 @@ export class RequestsComponent implements OnInit {
     this.fetchItems();
   }
 
+  formatStudentId(id) {
+    const lengthID = (id + '').length;
+    const numPaddings = 3 - lengthID;
+    return `Student #${'0'.repeat(numPaddings)}${id}`;
+  }
+
   fetchItems() {
     this._requestService.get('requests').subscribe(
       res => {
-        this.dataList = res.data;
+        const lenDat = res.data.length;
+        this.dataList = res.data.map((data, index) => ({
+          ...data,
+          displayID: this.formatStudentId(length + 1 - index)
+        }));
         this.loading = false;
       }, err => {
         this.loading = false;

@@ -46,13 +46,11 @@ export class AddRequestComponent implements OnInit {
 
   getRequestStudents() {
     this._storeService.studentRequests$.subscribe(students => {
-      this.dataList = students;
-    });
-  }
-
-  getRequests() {
-    this._storeService.studentRequests$.subscribe(students => {
-      this.dataList = students;
+      const lenStudents = students.length;
+      this.dataList = students.map((student, index) => ({
+        ...student,
+        displayId: this.formatStudentId(lenStudents - index)
+      }));
     });
   }
 
@@ -120,5 +118,11 @@ export class AddRequestComponent implements OnInit {
       },
       err => this.deleteItemError = err
     );
+  }
+
+  formatStudentId(id) {
+    const lengthID = (id + '').length;
+    const numPaddings = 3 - lengthID;
+    return `Student #${'0'.repeat(numPaddings)}${id}`;
   }
 }
