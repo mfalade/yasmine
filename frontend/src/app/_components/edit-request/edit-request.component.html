@@ -11,9 +11,9 @@
   </ngl-notification>
 </div>
 
-<form [formGroup]="requestForm" class="container">
+<form [formGroup]="requestForm" class="container" *ngIf="!isFetchingUserData && data">
     <div>
-      <h3>Request</h3>
+      <h3>Edit Request</h3>
       <p>Please fill up all required fields</p>
       <hr />
       <div class="form-container">
@@ -92,6 +92,16 @@
       </div>
     </div>
   </form>
+
+  <div *ngIf="!isFetchingUserData && !data">
+      <h4>
+        Request not found!
+      </h4><br />
+      <p>
+        It is possible the data store has been cleared.
+      </p><br /><br />
+      <p>Try creating a new request and try again.</p>
+    </div>
 
 
   <ngl-modal [header]="'Delete ' + stagedItem?.field2" [(open)]="showModal" [directional]="true">

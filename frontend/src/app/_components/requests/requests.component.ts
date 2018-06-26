@@ -23,10 +23,10 @@ export class RequestsComponent implements OnInit {
     this.fetchItems();
   }
 
-  formatStudentId(id) {
-    const lengthID = (id + '').length;
-    const numPaddings = 3 - lengthID;
-    return `Student #${'0'.repeat(numPaddings)}${id}`;
+  formatRequestId(data) {
+    const requestId = data.$loki + '';
+    const numPaddings = 3 - requestId.length;
+    return `Request #${'0'.repeat(numPaddings)}${requestId}`;
   }
 
   fetchItems() {
@@ -35,7 +35,7 @@ export class RequestsComponent implements OnInit {
         const lenDat = res.data.length;
         this.dataList = res.data.map((data, index) => ({
           ...data,
-          displayID: this.formatStudentId(length + 1 - index)
+          displayId: this.formatRequestId(data)
         }));
         this.loading = false;
       }, err => {
@@ -48,7 +48,7 @@ export class RequestsComponent implements OnInit {
   }
 
   editRequest (data) {
-    const url = `/requests/${data._id}/edit`;
+    const url = `/requests/${data['$loki']}/edit`;
     this._router.navigateByUrl(url);
   }
 
@@ -59,7 +59,7 @@ export class RequestsComponent implements OnInit {
   }
 
   confirmDelete () {
-    const resource = `requests/${this.stagedItem._id}`;
+    const resource = `requests/${this.stagedItem['$loki']}`;
     this._requestService.delete(resource).subscribe(
       res => {
         this.showModal = false;

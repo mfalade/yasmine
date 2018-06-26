@@ -51,10 +51,9 @@ export class AddRequestComponent implements OnInit {
 
   getRequestStudents() {
     this._storeService.studentRequests$.subscribe(students => {
-      const lenStudents = students.length;
-      this.dataList = students.reverse().map((student, index) => ({
+      this.dataList = students.reverse().map((student) => ({
         ...student,
-        displayId: this.formatStudentId(lenStudents - index)
+        displayId: this.formatStudentId(student)
       }));
     });
   }
@@ -64,12 +63,13 @@ export class AddRequestComponent implements OnInit {
   }
 
   editData (data) {
-    const url = `/user/${data._id}/edit`;
+    const userId = data['$loki'];
+    const url = `/user/${userId}/edit`;
     this._router.navigateByUrl(url);
   }
 
   submitRequest(requestStatus) {
-    const studentsId = this.dataList.map(user => user._id);
+    const studentsId = this.dataList.map(user => user['$loki']);
     this.loading = true;
     this.requestForm.controls['students'].setValue(studentsId);
     this.requestForm.controls['status'].setValue(requestStatus);
@@ -125,9 +125,9 @@ export class AddRequestComponent implements OnInit {
     );
   }
 
-  formatStudentId(id) {
-    const lengthID = (id + '').length;
-    const numPaddings = 3 - lengthID;
-    return `Student #${'0'.repeat(numPaddings)}${id}`;
+  formatStudentId(student) {
+    const studentId = student.$loki + '';
+    const numPaddings = 3 - studentId.length;
+    return `Student #${'0'.repeat(numPaddings)}${studentId}`;
   }
 }

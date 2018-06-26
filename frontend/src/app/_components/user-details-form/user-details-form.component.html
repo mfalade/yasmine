@@ -15,7 +15,7 @@
   <ngl-tabs [(selected)]="selectedTab" [type]="'default'">
     <ng-template ngl-tab nglTabId="Identity" #Identity="nglTab">
       <div>
-        <h4>Add New Student > Identity</h4>
+        <h4>{{ isNew ? 'Add New Student' : 'Edit > ' }} <span *ngIf="!isNew">{{ formatStudentId() }}</span></h4>
         <p>Please fill up the required fields:</p>
         <hr />
         <div class="form-container">

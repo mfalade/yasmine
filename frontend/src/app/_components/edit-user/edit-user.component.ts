@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from '../../_services/request.service';
+import { NavService } from '../../_services/nav.service';
 
 
 @Component({
@@ -19,10 +20,13 @@ export class EditUserComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _requestService: RequestService,
+    private _navService: NavService
   ) { }
 
   ngOnInit() {
     this.fetchUserData();
+    this._navService.resetState();
+    this._navService.setUserType('new-user');
   }
 
   fetchUserData() {
@@ -35,7 +39,7 @@ export class EditUserComponent implements OnInit {
       this._requestService.get(resource).subscribe(
         res => {
           this.isFetchingUserData = false;
-          this.userData = res.data[0];
+          this.userData = res.data;
         },
         err => {
           this.isFetchingUserData = false;

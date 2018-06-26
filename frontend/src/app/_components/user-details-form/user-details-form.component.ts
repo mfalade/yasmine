@@ -106,7 +106,7 @@ export class UserDetailsFormComponent implements OnInit, OnChanges {
   }
 
   updateUser() {
-    const url = `users/${this.formData._id}`;
+    const url = `users/${this.formData['$loki']}`;
     this._requestService.put(url, this.dataForm.value).subscribe(
       res => {
         this.isRequesting = false;
@@ -136,5 +136,11 @@ export class UserDetailsFormComponent implements OnInit, OnChanges {
         field8: 'default-1',
       });
     }, 1500);
+  }
+
+  formatStudentId() {
+    const requestId = this.userData['$loki'] + '';
+    const numPaddings = 3 - requestId.length;
+    return `Student #${'0'.repeat(numPaddings)}${requestId}`;
   }
 }

@@ -53,7 +53,7 @@ export class EditRequestComponent implements OnInit {
       const resource = `requests/${params['id']}`;
       this._requestService.get(resource).subscribe(
         res => {
-          const data = res.data[0];
+          const data = res.data;
           this.data = data;
           this.requestForm.patchValue(data);
           this.showRemarksInput = Boolean(data.remarks);

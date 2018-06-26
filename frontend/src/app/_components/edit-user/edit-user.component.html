@@ -12,3 +12,13 @@
 <div *ngIf="!isFetchingUserData && userData">
   <app-user-details-form [userData]="userData" (userUpdated)="onUserDataUpdated($event)"></app-user-details-form>
 </div>
+
+<div *ngIf="!isFetchingUserData && !userData">
+  <h4>
+    User not found!
+  </h4><br />
+  <p>
+    It is possible the data store has been cleared.
+  </p><br /><br />
+  <p>Try creating a new user and try again.</p>
+</div>

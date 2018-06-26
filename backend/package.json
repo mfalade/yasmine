@@ -8,6 +8,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "ignore-styles": "^5.0.1",
+    "lokijs": "^1.5.5",
     "monk": "^6.0.5",
     "nodemon": "^1.17.3"
   },
